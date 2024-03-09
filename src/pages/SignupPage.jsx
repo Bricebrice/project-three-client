@@ -24,10 +24,10 @@ function SignupPage(props) {
     e.preventDefault();
 
     // Check if passwords match
-    if (password !== passVerify) {
-      setErrorMessage("Passwords do not match");
-      return;
-    }
+    // if (password !== passVerify) {
+    //   setErrorMessage("Passwords do not match");
+    //   return;
+    // }
 
     const requestBody = { firstName, lastName, email, password, passVerify };
 

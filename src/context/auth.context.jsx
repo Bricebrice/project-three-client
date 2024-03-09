@@ -34,6 +34,7 @@ function AuthProviderWrapper(props) {
     } else {
       // If the token is not available
       setIsLoggedIn(false);
+      setUser(null);
     }
 
     // Set loading state to false after the authentication process is completed
