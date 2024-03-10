@@ -54,10 +54,10 @@ function Navbar() {
                 Profile
               </NavLink>
               <NavLink
-                to={"/profile/settings"}
+                to={`/profile/${user._id}`}
                 className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
               >
-                Settings
+                Edit User
               </NavLink>
               <button
                 onClick={logOutRedirect}
