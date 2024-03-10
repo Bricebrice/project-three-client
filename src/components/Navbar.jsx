@@ -1,9 +1,9 @@
 import { useNavigate, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/auth.context";
-import logo from "../../src/assets/logo.png";
 import { HiMenu, HiOutlineX } from "react-icons/hi";
 import "./Navbar.css";
+import NavLogo from "./NavLogo";
 
 function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
@@ -17,13 +17,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between flex-wrap p-4 bg-mantis-400">
-      <div className="flex items-center justify-between text-white mr-6">
-        <NavLink className="flex items-center gap-1" to={"/"}>
-          <img src={logo} alt="logo" className="h-12 w-auto" />
-          <span className="text-2xl">VeganEase Planner</span>
-        </NavLink>
-      </div>
+    <nav className="flex items-center justify-between flex-wrap py-2 px-4 bg-mantis-400">
+      <NavLogo />
       <div className="flex gap-3 items-center lg:hidden">
         {/* Profile Picture with menu option pops up when user is logged in */}
         {isLoggedIn && (
@@ -84,7 +79,7 @@ function Navbar() {
               navToggle ? "block" : "hidden"
             }`}
             style={{ color: "white" }}
-          ></HiOutlineX>
+          />
         </button>
       </div>
       <div
