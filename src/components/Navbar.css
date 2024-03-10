@@ -1,0 +1,13 @@
+
+#navlink-container a:after {
+  display: block;
+  content: "";
+  width: inherit;
+  border-bottom: solid 3px orange;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+#navlink-container a:hover:after {
+  transform: scaleX(1);
+}
