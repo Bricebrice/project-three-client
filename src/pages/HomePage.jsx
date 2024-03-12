@@ -15,7 +15,7 @@ function HomePage() {
       <hr />
       <ContactForm />
       <hr />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
