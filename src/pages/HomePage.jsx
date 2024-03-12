@@ -8,22 +8,14 @@ function HomePage() {
   return (
     <>
       <Header />
-
       <hr />
-
       <MainFeatures />
-
       <hr />
-
       <Testimonial />
-
       <hr />
-
       <ContactForm />
-
       <hr />
-
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
