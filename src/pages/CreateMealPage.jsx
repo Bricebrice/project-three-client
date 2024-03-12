@@ -4,13 +4,14 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5005";
 
-export default function SignupPage() {
+export default function CreateMealPage() {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
-    passVerify: "",
-    firstName: "",
-    lastName: "",
+    name: "",
+    calories: 0,
+    proteins: 0,
+    fats: 0,
+    carbs: 0,
+    image: "",
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -23,7 +24,7 @@ export default function SignupPage() {
     });
   };
 
-  const handleSignupSubmit = async (e) => {
+  const handleCreateMealSubmit = async (e) => {
     e.preventDefault();
 
     // Check if passwords match
@@ -32,8 +33,10 @@ export default function SignupPage() {
     //   return;
     // }
 
-    try{
-      const response = await axios.post(`${API_URL}/auth/signup`, form);
+    const requestBody = { form };
+
+    try {
+      const response = await axios.post(`${API_URL}/`, requestBody);
       // console.log("Signup response:", response.data);
       setForm({
         email: "",
@@ -53,7 +56,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="SignupPage bg-mustard-100 flex flex-col h-dvh items-center">
+    <div className="SignupPage bg-yellow-300 flex flex-col h-dvh items-center">
       <h1 className="text-3xl p-4">Sign Up</h1>
 
       <form
@@ -114,7 +117,6 @@ export default function SignupPage() {
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
               type="password"
               name="password"
-              id="password"
               value={form.password}
               onChange={handleChange}
             />
@@ -126,7 +128,6 @@ export default function SignupPage() {
             <input
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
               type="password"
-              id="passVerify"
               name="passVerify"
               value={form.passVerify}
               onChange={handleChange}
@@ -146,7 +147,10 @@ export default function SignupPage() {
 
       <div className="flex gap-2">
         <p>Already have account?</p>
-        <Link className="text-orange-700" to={"/login"}> Login</Link>
+        <Link className="text-orange-700" to={"/login"}>
+          {" "}
+          Login
+        </Link>
       </div>
     </div>
   );

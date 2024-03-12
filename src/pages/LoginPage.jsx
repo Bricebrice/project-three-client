@@ -25,10 +25,10 @@ export default function LoginPage() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    const requestBody = { form };
+
 
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, requestBody);
+      const response = await axios.post(`${API_URL}/auth/login`, form);
       // console.log('Login response:', response.data);
       //console.log("JWT token", response.data.authToken);
       storeToken(response.data.authToken);
@@ -45,11 +45,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="LoginPage bg-yellow-300 flex flex-col h-dvh items-center ">
+    <div className="LoginPage bg-mustard-100 flex flex-col h-dvh items-center ">
       <h1 className="text-3xl p-4">Login</h1>
 
       <form
-        className="max-w-md mx-auto flex flex-col items-center mb-5  bg-yellow-400 rounded p-7"
+        className="max-w-md mx-auto flex flex-col items-center mb-5 bg-mustard-400 rounded p-7"
         onSubmit={handleLoginSubmit}
       >
         <div className="mb-5">
@@ -71,6 +71,7 @@ export default function LoginPage() {
             className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
             type="password"
             name="password"
+            id="password"
             value={form.password}
             onChange={handleChange}
           />
@@ -87,7 +88,10 @@ export default function LoginPage() {
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <div className="flex gap-2">
         <p>Not a member yet?</p>
-        <Link className="text-orange-700" to={"/signup"}> Sign up</Link>
+        <Link className="text-orange-700" to={"/signup"}>
+          {" "}
+          Sign up
+        </Link>
       </div>
     </div>
   );
