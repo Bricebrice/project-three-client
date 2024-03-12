@@ -92,7 +92,7 @@ function Navbar() {
           className="text-sm lg:flex lg: items-center lg:gap-3"
         >
           {isLoggedIn && (
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <img
                 onClick={() => {
                   setMenuToggle(!menuToggle);
