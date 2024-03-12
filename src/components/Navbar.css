@@ -11,3 +11,8 @@
 #navlink-container a:hover:after {
   transform: scaleX(1);
 }
+
+#navlink-container a.active {
+  background: #A5D9A9;
+  border-radius: 0.25rem;
+}

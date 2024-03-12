@@ -93,7 +93,7 @@ function Navbar() {
               setNavToggle(false);
             }}
             to={"/"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center"
+            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
           >
             Home
           </NavLink>
@@ -103,7 +103,7 @@ function Navbar() {
                 setNavToggle(false);
               }}
               to={"/login"}
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
             >
               Log In
             </NavLink>
@@ -114,7 +114,7 @@ function Navbar() {
                 setNavToggle(false);
               }}
               to={"/signup"}
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
             >
               Sign Up
             </NavLink>
