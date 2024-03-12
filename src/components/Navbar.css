@@ -1,0 +1,18 @@
+
+#navlink-container a:after {
+  display: block;
+  content: "";
+  width: inherit;
+  border-bottom: solid 3px orange;
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+
+#navlink-container a:hover:after {
+  transform: scaleX(1);
+}
+
+#navlink-container a.active {
+  background: #A5D9A9;
+  border-radius: 0.25rem;
+}
