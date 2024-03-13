@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import authService from "../../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -32,8 +33,8 @@ export default function SignupPage() {
     //   return;
     // }
 
-    try{
-      const response = await axios.post(`${API_URL}/auth/signup`, form);
+    try {
+      const response = authService.signup(form);
       // console.log("Signup response:", response.data);
       setForm({
         email: "",
@@ -146,7 +147,9 @@ export default function SignupPage() {
 
       <div className="flex gap-2">
         <p>Already have account?</p>
-        <Link className="text-orange-700" to={"/login"}> Login</Link>
+        <Link className="text-orange-700" to={"/login"}>
+          Login
+        </Link>
       </div>
     </div>
   );

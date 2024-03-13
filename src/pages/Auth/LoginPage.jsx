@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+import { AuthContext } from "../../context/auth.context";
+import authService from "../../services/auth.service";
 
 const API_URL = "http://localhost:5005";
 
@@ -26,16 +26,13 @@ export default function LoginPage() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
-
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, form);
-      // console.log('Login response:', response.data);
+      const response = authService.login(form)
+      //console.log('Login response:', response.data);
       //console.log("JWT token", response.data.authToken);
       storeToken(response.data.authToken);
-
       // Verify the token by sending a request to the server's JWT validation endpoint.
       await authenticateUser();
-
       //console.log("Navigate to the profile page");
       navigate("/profile");
     } catch (err) {
