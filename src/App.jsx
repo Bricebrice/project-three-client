@@ -13,6 +13,7 @@ import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
+import CreateIngredientPage from "./pages/CreateIngredientPage";
 
 function App() {
   return (
@@ -21,7 +22,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-
         <Route
           path="/profile"
           element={
@@ -30,10 +30,11 @@ function App() {
             </IsPrivate>
           }
         />
-
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/create-ingredient" element={<CreateIngredientPage />} />
         <Route path="*" element={<ErrorPage />} />
+
       </Routes>
     </div>
   );
