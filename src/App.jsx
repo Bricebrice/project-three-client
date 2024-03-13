@@ -10,6 +10,7 @@ import IsAnon from "./components/IsAnon";
 
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
 import CreateIngredientPage from "./pages/CreateIngredientPage";
@@ -32,6 +33,8 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-ingredient" element={<CreateIngredientPage />} />
+        <Route path="*" element={<ErrorPage />} />
+
       </Routes>
     </div>
   );

@@ -87,7 +87,52 @@ function Navbar() {
           navToggle ? "block" : "hidden"
         }`}
       >
-        <div id="navlink-container" className="text-sm lg:flex">
+        <div
+          id="navlink-container"
+          className="text-sm lg:flex lg: items-center lg:gap-3"
+        >
+          {isLoggedIn && (
+            <div className="relative hidden lg:block">
+              <img
+                onClick={() => {
+                  setMenuToggle(!menuToggle);
+                }}
+                src={user.profilePic}
+                className="w-8 h-8 rounded-full block hover:ring-4 hover:ring-mantis-600 "
+              />
+              <div
+                className={`bg-mantis-600 ${
+                  menuToggle ? "absolute" : "hidden"
+                } -left-36 top-10 rounded-md w-44`}
+              >
+                <span className="text-sm text-white block m-2 p-1 text-nowrap">
+                  {user.firstName + " " + user.lastName}
+                </span>
+                <span className="text-sm text-white block mx-2 mb-2 p-1">
+                  {user.email}
+                </span>
+
+                <NavLink
+                  to={"/profile"}
+                  className="text-sm text-white block mx-2 mb-2 p-1 rounded hover:bg-mantis-300"
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  to={`/profile/${user._id}`}
+                  className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
+                >
+                  Edit User
+                </NavLink>
+                <button
+                  onClick={logOutRedirect}
+                  className="text-sm text-white bg-orange-500 mx-1 mb-2 py-1 px-14 rounded text-nowrap"
+                >
+                  Sign Out
+                </button>
+              </div>
+            </div>
+          )}
           <NavLink
             onClick={() => {
               setNavToggle(false);
@@ -119,7 +164,6 @@ function Navbar() {
               Sign Up
             </NavLink>
           )}
-          {isLoggedIn && <button onClick={logOutRedirect}>Sign Out</button>}
         </div>
       </div>
     </nav>
