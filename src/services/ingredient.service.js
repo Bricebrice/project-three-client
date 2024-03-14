@@ -5,18 +5,6 @@ class IngredientService {
     this.api = axios.create({
       baseURL: import.meta.env.REACT_APP_API_URL || "http://localhost:5005",
     });
-
-    // Automatically set JWT token in the headers for every request
-    this.api.interceptors.request.use((config) => {
-      // Retrieve the JWT token from the local storage
-      const storedToken = localStorage.getItem("authToken");
-
-      if (storedToken) {
-        config.headers = { Authorization: `Bearer ${storedToken}` };
-      }
-
-      return config;
-    });
   }
 
   allIngredients = () => {
@@ -42,12 +30,12 @@ class IngredientService {
     // same as
     // return axios.get("http://localhost:5005/ingredient/:ingredientId");
   };
-  
+
   edit = (ingredientId, requestBody) => {
     return this.api.put(`/ingredient/${ingredientId}/edit`, requestBody);
     // same as
     // return axios.put("http://localhost:5005/ingredient/:ingredientId/edit", requestBody);
-  }
+  };
 }
 
 // Create one instance (object) of the service

@@ -7,7 +7,8 @@ const API_URL = "http://localhost:5005";
 
 export default function EditIngredientPage() {
   const { ingredientId } = useParams();
-  const [ingredient, setIngredient] = useState({
+  console.log("ingredientId", ingredientId);
+  const [form, setForm] = useState({
     name: "",
     calories: 0,
     proteins: 0,
@@ -15,20 +16,17 @@ export default function EditIngredientPage() {
     carbs: 0,
     imageUrl: "",
   });
-  const [form, setForm] = useState({
-    name: ingredient.name,
-    calories: ingredient.calories,
-    proteins: ingredient.proteins,
-    fats: ingredient.fats,
-    carbs: ingredient.carbs,
-    imageUrl: ingredient.imageUrl,
-  });
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
   const fetchData = async (id) => {
+    //const response = await axios.get(`http://localhost:5005/ingredient/${id}`);
     const response = await ingredientService.findById(id);
-    return setIngredient(response.data);
+    //console.log(response.data);
+    const { name, calories, proteins, fats, carbs, imageUrl } = response.data;
+    let foundIngredient = { name, calories, proteins, fats, carbs, imageUrl }
+    //console.log("foundIngredient", foundIngredient);
+    setForm(foundIngredient);
   };
 
   useEffect(() => {
@@ -49,11 +47,12 @@ export default function EditIngredientPage() {
       // imageUrl => this name has to be the same as in the model since we pass
       // req.body to .create() method when creating a new movie in '/api/movies' POST route
       uploadData.append("imageUrl", e.target.files[0]);
-      const response = await axios.post(
+      /*const response = await axios.post(
         `${API_URL}/ingredient/image-upload`,
         uploadData
-      );
-      console.log("response is: ", response);
+      );*/
+      const response = await ingredientService.imageUpload(uploadData)
+      //console.log("response is: ", response);
       // response carries "fileUrl" which we can use to update the state
       setForm({
         ...form,
@@ -67,11 +66,13 @@ export default function EditIngredientPage() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(
+     /* const response = await axios.put(
         `${API_URL}/ingredient/${ingredientId}/edit`,
         form
-      );
-      navigate("/ingredients");
+      ); */
+      const response = await ingredientService.edit(ingredientId, form);
+      //console.log(response);
+      navigate("/");
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }
@@ -164,7 +165,7 @@ export default function EditIngredientPage() {
           className="bg-orange-400 border-2 shadow border-orange-500 rounded w-full py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
           type="submit"
         >
-          Create Ingredient
+          Update Ingredient
         </button>
       </form>
 
