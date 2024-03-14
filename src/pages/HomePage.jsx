@@ -3,7 +3,6 @@ import MainFeatures from "../components/MainFeatures";
 import Testimonials from "../components/Testimonials";
 import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
-import Testimonial from "../components/Testimonial";
 
 function HomePage() {
   return (
