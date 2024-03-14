@@ -19,7 +19,7 @@ class IngredientService {
     });
   }
 
-  all = () => {
+  allIngredients = () => {
     return this.api.get("/ingredient/all-ingredients");
     // same as
     // return axios.get("http://localhost:5005/ingredient/all-ingredients");
@@ -37,14 +37,14 @@ class IngredientService {
     //return axios.post("http://localhost:5005/ingredient/create-ingredient", requestBody);
   };
 
-  find = () => {
-    return this.api.get("/ingredient/:ingredientId");
+  findById = (ingredientId) => {
+    return this.api.get(`/ingredient/${ingredientId}`);
     // same as
     // return axios.get("http://localhost:5005/ingredient/:ingredientId");
   };
   
-  edit = (requestBody) => {
-    return this.api.put("/ingredient/:ingredientId/edit", requestBody);
+  edit = (ingredientId, requestBody) => {
+    return this.api.put(`/ingredient/${ingredientId}/edit`, requestBody);
     // same as
     // return axios.put("http://localhost:5005/ingredient/:ingredientId/edit", requestBody);
   }
