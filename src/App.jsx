@@ -3,13 +3,13 @@ import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/Auth/ProfilePage";
 
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 
-import SignupPage from "./pages/SignupPage";
-import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/Auth/SignupPage";
+import LoginPage from "./pages/Auth/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
@@ -34,7 +34,6 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-ingredient" element={<CreateIngredientPage />} />
         <Route path="*" element={<ErrorPage />} />
-
       </Routes>
     </div>
   );
