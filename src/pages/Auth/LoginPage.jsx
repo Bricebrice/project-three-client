@@ -27,7 +27,7 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const response = authService.login(form)
+      const response = await authService.login(form);
       //console.log('Login response:', response.data);
       //console.log("JWT token", response.data.authToken);
       storeToken(response.data.authToken);
