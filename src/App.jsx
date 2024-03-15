@@ -15,6 +15,7 @@ import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
 import CreateIngredientPage from "./pages/CreateIngredientPage";
+import MealDetailsPage from "./pages/MealDetailsPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/all-meals" element={<AllMealsPage />} />
+        <Route path="/meal/:mealId" element={<MealDetailsPage />} />
         <Route
           path="/profile"
           element={
