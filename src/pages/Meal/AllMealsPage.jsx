@@ -5,19 +5,33 @@ import mealService from "../../services/meal.service";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getAllMeals = async () => {
+    setIsLoading(true);
+
     try {
       const response = await mealService.allMeals();
+      console.log("Response meals: ", response.data.meals);
       setAllMeals(response.data.meals);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     getAllMeals();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <>

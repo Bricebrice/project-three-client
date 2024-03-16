@@ -53,7 +53,7 @@ export default function CreateIngredientPage() {
   };
 
   return (
-    <div className="bg-mustard-100 flex flex-col h-dvh items-center ">
+    <div className="bg-mustard-100 flex flex-col h-dvh items-center">
       <h1 className="text-3xl p-4">Create Ingredient</h1>
 
       <form
@@ -61,7 +61,7 @@ export default function CreateIngredientPage() {
         onSubmit={handleCreateSubmit}
       >
         <div className="mb-5">
-          <label className="block mb-2 text-sm font-medium" htmlFor="email">
+          <label className="block mb-2 text-sm font-medium" htmlFor="name">
             Name:
           </label>
           <input
@@ -78,7 +78,7 @@ export default function CreateIngredientPage() {
           <input
             className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
             type="number"
-            name="number"
+            name="calories"
             id="calories"
             value={form.calories}
             onChange={handleChange}
