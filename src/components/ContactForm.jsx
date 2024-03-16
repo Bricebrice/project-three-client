@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API_URL = "http://localhost:5005";
+import contactService from "../services/contact.service";
 
 function ContactForm() {
   const [form, setForm] = useState({
@@ -27,7 +24,7 @@ function ContactForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${API_URL}/send-email`, form);
+      const response = await contactService.sendEmail(form);
       console.log("Send email response:", response.data);
       setSuccessMessage("Your message has been sent succesfully!");
       setForm({
