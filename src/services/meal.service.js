@@ -19,7 +19,9 @@ class MealService {
     return this.api.post("/meal/create-new-meal", requestBody);
   };
 
-
+  findById = (ingredientId) => {
+    return this.api.get(`/meal/${ingredientId}`);
+  };
 }
 
 // Create one instance (object) of the service
