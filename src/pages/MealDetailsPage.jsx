@@ -8,25 +8,42 @@ const API_URL = "http://localhost:5005";
 
 function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
-
   const { mealId } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+
   console.log("meal id: ", mealId);
 
+  const fetchData = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await axios.get(`${API_URL}/meal/${mealId}`);
+      console.log("response.data ", response.data);
+      setFoundMeal(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const response = async () => {
-      try {
-        await axios.get(`${API_URL}/${mealId}`);
-        console.log("response.data ", response.data);
-        setFoundMeal(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    fetchData(mealId);
   }, [mealId]);
+
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <>
-      <p>Hi</p>
+      <Link to="/all-meals">Back</Link>
+      {!foundMeal && <h3>This meal doesn't exist!</h3>}
+      {foundMeal && <CustomCard item={foundMeal} isMealDetailsPage={true} />}
     </>
   );
 }
