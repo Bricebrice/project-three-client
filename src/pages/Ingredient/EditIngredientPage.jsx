@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import ingredientService from "../../services/ingredient.service";
-
-const API_URL = "http://localhost:5005";
 
 export default function EditIngredientPage() {
   const { ingredientId } = useParams();
@@ -24,7 +21,7 @@ export default function EditIngredientPage() {
     const response = await ingredientService.findById(id);
     //console.log(response.data);
     const { name, calories, proteins, fats, carbs, imageUrl } = response.data;
-    let foundIngredient = { name, calories, proteins, fats, carbs, imageUrl }
+    let foundIngredient = { name, calories, proteins, fats, carbs, imageUrl };
     //console.log("foundIngredient", foundIngredient);
     setForm(foundIngredient);
   };
@@ -51,7 +48,7 @@ export default function EditIngredientPage() {
         `${API_URL}/ingredient/image-upload`,
         uploadData
       );*/
-      const response = await ingredientService.imageUpload(uploadData)
+      const response = await ingredientService.imageUpload(uploadData);
       //console.log("response is: ", response);
       // response carries "fileUrl" which we can use to update the state
       setForm({
@@ -66,7 +63,7 @@ export default function EditIngredientPage() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-     /* const response = await axios.put(
+      /* const response = await axios.put(
         `${API_URL}/ingredient/${ingredientId}/edit`,
         form
       ); */

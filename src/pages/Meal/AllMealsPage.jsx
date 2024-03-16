@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import CustomCard from "../components/Card";
-import Footer from "../components/Footer";
+import CustomCard from "../../components/Card";
+import Footer from "../../components/Footer";
 
 const API_URL = "http://localhost:5005";
 

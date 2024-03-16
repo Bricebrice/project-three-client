@@ -10,31 +10,31 @@ class IngredientService {
   allIngredients = () => {
     return this.api.get("/ingredient/all-ingredients");
     // same as
-    // return axios.get("http://localhost:5005/ingredient/all-ingredients");
+    // return axios.get("https://veganease-api.onrender.com/ingredient/all-ingredients");
   };
 
   imageUpload = (requestBody) => {
     return this.api.post("/ingredient/image-upload", requestBody);
     // same as
-    // return axios.post("http://localhost:5005/ingredient/image-upload", requestBody);
+    // return axios.post("https://veganease-api.onrender.com/ingredient/image-upload", requestBody);
   };
 
   create = (requestBody) => {
     return this.api.post("/ingredient/create-ingredient", requestBody);
     //same as
-    //return axios.post("http://localhost:5005/ingredient/create-ingredient", requestBody);
+    //return axios.post("https://veganease-api.onrender.com/ingredient/create-ingredient", requestBody);
   };
 
   findById = (ingredientId) => {
     return this.api.get(`/ingredient/${ingredientId}`);
     // same as
-    // return axios.get("http://localhost:5005/ingredient/:ingredientId");
+    // return axios.get("https://veganease-api.onrender.com/ingredient/:ingredientId");
   };
 
   edit = (ingredientId, requestBody) => {
     return this.api.put(`/ingredient/${ingredientId}/edit`, requestBody);
     // same as
-    // return axios.put("http://localhost:5005/ingredient/:ingredientId/edit", requestBody);
+    // return axios.put("https://veganease-api.onrender.com/ingredient/:ingredientId/edit", requestBody);
   };
 }
 

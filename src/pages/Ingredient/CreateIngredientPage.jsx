@@ -1,8 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = "http://localhost:5005";
+import ingredientService from "../../services/ingredient.service";
 
 export default function CreateIngredientPage() {
   const [form, setForm] = useState({
@@ -31,10 +29,7 @@ export default function CreateIngredientPage() {
       // imageUrl => this name has to be the same as in the model since we pass
       // req.body to .create() method when creating a new movie in '/api/movies' POST route
       uploadData.append("imageUrl", e.target.files[0]);
-      const response = await axios.post(
-        `${API_URL}/ingredient/image-upload`,
-        uploadData
-      );
+      const response = await ingredientService.imageUpload(uploadData);
       console.log("response is: ", response);
       // response carries "fileUrl" which we can use to update the state
       setForm({
@@ -49,10 +44,8 @@ export default function CreateIngredientPage() {
   const handleCreateSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        `${API_URL}/ingredient/create-ingredient`,
-        form
-      );
+      const response = await ingredientService.create(form);
+      console.log(response.data);
       navigate("/ingredients");
     } catch (error) {
       setErrorMessage(error.response.data.message);
@@ -125,10 +118,21 @@ export default function CreateIngredientPage() {
           />
         </div>
         <div className="mb-5 flex-col items-center justify-center w-full">
-          <input className="mb-5 mx-auto hover:cursor-pointer" type="file" onChange={(e) => handleFileUpload(e)} />
+          <input
+            className="mb-5 mx-auto hover:cursor-pointer"
+            type="file"
+            onChange={(e) => handleFileUpload(e)}
+          />
 
-          {form.imageUrl === "" ? <div className="w-24 h-24 mx-auto rounded-full bg-mantis-400"></div> : <img src={form.imageUrl} className="w-24 h-24 mx-auto rounded-full" alt="food-image" />}
-          
+          {form.imageUrl === "" ? (
+            <div className="w-24 h-24 mx-auto rounded-full bg-mantis-400"></div>
+          ) : (
+            <img
+              src={form.imageUrl}
+              className="w-24 h-24 mx-auto rounded-full"
+              alt="food-image"
+            />
+          )}
         </div>
 
         <button
