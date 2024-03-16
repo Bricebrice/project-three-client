@@ -18,6 +18,7 @@ import MealDetailsPage from "./pages/Meal/MealDetailsPage";
 
 import CreateIngredientPage from "./pages/Ingredient/CreateIngredientPage";
 import EditIngredientPage from "./pages/Ingredient/EditIngredientPage";
+import AllIngredientsPage from "./pages/Ingredient/AllIngredientsPage";
 
 console.log("vite env: ", import.meta.env);
 
@@ -28,8 +29,6 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/all-meals" element={<AllMealsPage />} />
-        <Route path="/meal/:mealId" element={<MealDetailsPage />} />
         <Route
           path="/profile"
           element={
@@ -40,11 +39,17 @@ function App() {
         />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+
+        <Route path="all-ingredients" element={<AllIngredientsPage />}/>            
         <Route path="/create-ingredient" element={<CreateIngredientPage />} />
         <Route
           path="/edit-ingredient/:ingredientId"
           element={<EditIngredientPage />}
         />
+
+        <Route path="/all-meals" element={<AllMealsPage />} />
+        <Route path="/meal/:mealId" element={<MealDetailsPage />} />
+
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

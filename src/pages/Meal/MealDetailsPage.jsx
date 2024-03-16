@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import CustomCard from "../../components/Card";
+import CustomCard from "../../components/CustomCard";
 import mealService from "../../services/meal.service";
 
 function MealDetailsPage() {
@@ -41,7 +41,7 @@ function MealDetailsPage() {
     <>
       <Link to="/all-meals">Back</Link>
       {!foundMeal && <h3>This meal doesn't exist!</h3>}
-      {foundMeal && <CustomCard item={foundMeal} isMealDetailsPage={true} />}
+      {foundMeal && <CustomCard item={foundMeal} />}
     </>
   );
 }
