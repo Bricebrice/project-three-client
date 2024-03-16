@@ -3,7 +3,7 @@ import axios from "axios";
 class MealService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.REACT_APP_API_URL,
+      baseURL: import.meta.env.VITE_DEPLOYMENT_URL,
     });
   }
 
@@ -19,7 +19,7 @@ class MealService {
     return this.api.post("/meal/create-new-meal", requestBody);
   };
 
-  
+
 }
 
 // Create one instance (object) of the service
