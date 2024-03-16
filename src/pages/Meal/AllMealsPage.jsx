@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CustomCard from "../../components/Card";
 import Footer from "../../components/Footer";
-
-const API_URL = "http://localhost:5005";
+import mealService from "../../services/meal.service";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
 
   const getAllMeals = async () => {
     try {
-      const response = await axios.get(`${API_URL}/meal/all-meals`);
+      const response = await mealService.allMeals();
       setAllMeals(response.data.meals);
     } catch (error) {
       console.log(error);
