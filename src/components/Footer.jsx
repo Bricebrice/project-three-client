@@ -1,15 +1,13 @@
+import logo from "../../src/assets/logo.png";
+
 function Footer() {
   return (
     <footer className="bg-gray-900 dark:bg-gray-900">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
-              <img
-                src="https://flowbite.com/docs/images/logo.svg"
-                className="h-8 me-3"
-                alt="FlowBite Logo"
-              />
+            <a href="/" className="flex items-center">
+              <img src={logo} className="h-8 me-2" alt="VegEase Planner Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
                 VegEase Planner
               </span>
@@ -129,7 +127,7 @@ function Footer() {
         <div className="text-center ">
           <span className="text-sm text-gray-400 sm:text-center dark:text-gray-400">
             © 2024{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
+            <a href="/" className="hover:underline">
               VegEase Planner™
             </a>
             . All rights reserved. Made with love ❤.

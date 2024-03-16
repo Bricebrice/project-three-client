@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Navbar from "../src/components/Navbar";
 import HomePage from "../src/pages/HomePage";
 import ProfilePage from "../src/pages/Auth/ProfilePage";
-
+import Navbar from "./components/Navbar";
+import AllMealsPage from "./pages/AllMealsPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
-
 import SignupPage from "../src/pages/Auth/SignupPage";
 import LoginPage from "../src/pages/Auth/LoginPage";
 import ErrorPage from "../src/pages/ErrorPage";
@@ -16,6 +15,8 @@ import ErrorPage from "../src/pages/ErrorPage";
 import "./App.css";
 import CreateIngredientPage from "../src/pages/Ingredient/CreateIngredientPage";
 import EditIngredientPage from "../src/pages/Ingredient/EditIngredientPage";
+import MealDetailsPage from "./pages/MealDetailsPage";
+
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/all-meals" element={<AllMealsPage />} />
+        <Route path="/meal/:mealId" element={<MealDetailsPage />} />
         <Route
           path="/profile"
           element={
@@ -37,7 +40,6 @@ function App() {
         <Route path="/create-ingredient" element={<CreateIngredientPage />} />
         <Route path="/edit-ingredient/:ingredientId" element={<EditIngredientPage />} /> 
         <Route path="*" element={<ErrorPage />} />
-
       </Routes>
     </div>
   );

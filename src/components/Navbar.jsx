@@ -142,6 +142,15 @@ function Navbar() {
           >
             Home
           </NavLink>
+          <NavLink
+            onClick={() => {
+              setNavToggle(false);
+            }}
+            to={"/all-meals"}
+            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
+          >
+            All meals
+          </NavLink>
           {!isLoggedIn && (
             <NavLink
               onClick={() => {
