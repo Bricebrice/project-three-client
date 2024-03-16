@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import "./App.css";
 
-import HomePage from "../src/pages/HomePage";
-import ProfilePage from "../src/pages/Auth/ProfilePage";
 import Navbar from "./components/Navbar";
-import AllMealsPage from "./pages/AllMealsPage";
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
-import SignupPage from "../src/pages/Auth/SignupPage";
-import LoginPage from "../src/pages/Auth/LoginPage";
-import ErrorPage from "../src/pages/ErrorPage";
+import HomePage from "./pages/HomePage";
 
-import "./App.css";
-import CreateIngredientPage from "../src/pages/Ingredient/CreateIngredientPage";
-import EditIngredientPage from "../src/pages/Ingredient/EditIngredientPage";
-import MealDetailsPage from "./pages/MealDetailsPage";
+import ErrorPage from "./pages/ErrorPage";
+
+import SignupPage from "./pages/Auth/SignupPage";
+import LoginPage from "./pages/Auth/LoginPage";
+import ProfilePage from "./pages/Auth/ProfilePage";
+
+import AllMealsPage from "./pages/Meal/AllMealsPage";
+import MealDetailsPage from "./pages/Meal/MealDetailsPage";
+
+import CreateIngredientPage from "./pages/Ingredient/CreateIngredientPage";
+import EditIngredientPage from "./pages/Ingredient/EditIngredientPage";
 
 console.log("vite env: ", import.meta.env);
 
