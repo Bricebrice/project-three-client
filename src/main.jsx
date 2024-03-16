@@ -5,6 +5,7 @@ import "./index.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProviderWrapper } from "./context/auth.context";
 
+console.log("vite env: ", import.meta.env);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Router>
