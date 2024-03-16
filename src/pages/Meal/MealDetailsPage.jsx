@@ -26,7 +26,7 @@ function MealDetailsPage() {
   };
 
   useEffect(() => {
-    fetchData(mealId);
+    fetchData();
   }, []);
 
   if (isLoading) {
