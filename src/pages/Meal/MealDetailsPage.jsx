@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
-import CustomCard from "../../components/Card";
+import CustomCard from "../../components/CustomCard";
 import mealService from "../../services/meal.service";
 
 function MealDetailsPage() {
@@ -15,7 +15,7 @@ function MealDetailsPage() {
     setIsLoading(true);
 
     try {
-      const response = await mealService.findById(mealId)
+      const response = await mealService.findById(mealId);
       console.log("response.data ", response.data);
       setFoundMeal(response.data);
       setIsLoading(false);
