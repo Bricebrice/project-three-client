@@ -1,21 +1,22 @@
 import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
+import HomePage from "../src/pages/HomePage";
+import ProfilePage from "../src/pages/Auth/ProfilePage";
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
-import ProfilePage from "./pages/Auth/ProfilePage";
 import AllMealsPage from "./pages/AllMealsPage";
-
 import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
+import SignupPage from "../src/pages/Auth/SignupPage";
+import LoginPage from "../src/pages/Auth/LoginPage";
+import ErrorPage from "../src/pages/ErrorPage";
 
-import SignupPage from "./pages/Auth/SignupPage";
-import LoginPage from "./pages/Auth/LoginPage";
-import ErrorPage from "./pages/ErrorPage";
 
 import "./App.css";
-import CreateIngredientPage from "./pages/CreateIngredientPage";
+import CreateIngredientPage from "../src/pages/Ingredient/CreateIngredientPage";
+import EditIngredientPage from "../src/pages/Ingredient/EditIngredientPage";
 import MealDetailsPage from "./pages/MealDetailsPage";
+
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/create-ingredient" element={<CreateIngredientPage />} />
+        <Route path="/edit-ingredient/:ingredientId" element={<EditIngredientPage />} /> 
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
