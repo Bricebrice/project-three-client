@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import CustomCard from "../components/Card";
+import Footer from "../components/Footer";
 
 const API_URL = "http://localhost:5005";
 
@@ -10,7 +11,6 @@ function AllMealsPage() {
   const getAllMeals = async () => {
     try {
       const response = await axios.get(`${API_URL}/meal/all-meals`);
-      console.log("all meals: ", response);
       setAllMeals(response.data.meals);
     } catch (error) {
       console.log(error);
@@ -23,16 +23,26 @@ function AllMealsPage() {
 
   return (
     <>
-      <div>
-        {allMeals.map((meal) => (
-          <div key={meal._id} to={`/meal/${meal._id}`}>
-            <img src={meal.imageUrl} alt={meal.name} />
-            <div>
-              <h3>{meal.name}</h3>
-            </div>
+      <section className="bg-white dark:bg-gray-900">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
+          <div className="max-w-screen-xl mb-16">
+            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
+              All meals
+            </h2>
           </div>
-        ))}
-      </div>
+          <div className="flex flex-wrap justify-center sm:gap-6">
+            {allMeals.map((meal) => (
+              <div
+                key={meal._id}
+                className="p-2 w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+              >
+                <CustomCard item={meal} url="/meal" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <Footer />
     </>
   );
 }
