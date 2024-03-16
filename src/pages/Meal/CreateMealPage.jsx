@@ -11,7 +11,7 @@ export default function CreateMealPage() {
     proteins: 0,
     fats: 0,
     carbs: 0,
-    image: "",
+    imageUrl: "",
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
 
@@ -60,7 +60,7 @@ export default function CreateMealPage() {
       <h1 className="text-3xl p-4">Sign Up</h1>
 
       <form
-        onSubmit={handleSignupSubmit}
+        onSubmit={handleCreateMealSubmit}
         className="max-w-sm mx-auto flex flex-col items-center mb-5 bg-yellow-400 rounded p-7"
       >
         <div className="mb-5 flex gap-3">

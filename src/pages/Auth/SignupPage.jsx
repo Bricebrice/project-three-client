@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import authService from "../../services/auth.service";
-
-const API_URL = "http://localhost:5005";
 
 export default function SignupPage() {
   const [form, setForm] = useState({
@@ -59,7 +56,7 @@ export default function SignupPage() {
 
       <form
         onSubmit={handleSignupSubmit}
-        className="max-w-sm mx-auto flex flex-col items-center mb-5 bg-yellow-400 rounded p-7"
+        className="max-w-sm mx-auto flex flex-col items-center mb-5 bg-mustard-400 rounded p-7"
       >
         <div className="mb-5 flex gap-3">
           <div>
