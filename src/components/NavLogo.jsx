@@ -6,7 +6,7 @@ export default function NavLogo() {
     <div className="flex items-center text-white">
       <NavLink className="flex items-center gap-1" to={"/"}>
         <img src={logo} alt="logo" className="h-12 w-auto" />
-        <span className="text-2xl">VeganEase Planner</span>
+        <span className="text-2xl">VegEase Planner</span>
       </NavLink>
     </div>
   );
