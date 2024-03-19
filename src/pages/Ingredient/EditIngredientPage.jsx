@@ -69,7 +69,7 @@ export default function EditIngredientPage() {
       ); */
       const response = await ingredientService.edit(ingredientId, form);
       //console.log(response);
-      navigate("/");
+      navigate("/all-ingredients");
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }

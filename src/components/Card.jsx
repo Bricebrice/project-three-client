@@ -12,16 +12,34 @@ export default function Card({ item, url }) {
   };
 
   return (
-    <Link to={`${url}/${item._id}`} className="rounded-lg shadow-lg h-46">
-      <div className="relative">
-        <img src={item.imageUrl} alt="" className="w-full h-32" />
-        <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 left-0 right-0 bg-gray-900 opacity-25"></div>
+    <div className="max-w-sm rounded shadow-lg bg-white hover:bg-mantis-300 overflow-visible">
+      <div className="relative rounded">
+        <Link to={`${url}/${item._id}`}>
+          <img
+            src={item.imageUrl}
+            alt="food food food"
+            className="w-full lg:h-64 h-32 rounded-t"
+          />
+        </Link>
+        {menuToggle && (
+          <div className="absolute bg-white shadow-md rounded-md lg:left-28 bottom-0 right-1 ">
+            {/* Can't nest Links!! Bad html practice */}
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to today</p>
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to week</p>
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to favourite</p>
+          </div>
+        )}
       </div>
-      <div className="relative h-16 px-6 py-4 flex items-center justify-between bg-mantis-200">
-        <h5 className="font-semibold text-lg inline-block">{item.name}</h5>
-        <button onClick={handleMenuClick}>
+      <div className="px-6 py-4 flex items-center justify-between h-20">
+        <Link to={`${url}/${item._id}`} className="font-bold text-lg">
+          {item.name}
+        </Link>
+        <button
+          onClick={handleMenuClick}
+          className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
+        >
           <svg
-            className="w-6 h-6 text-gray-800 dark:text-white"
+            className="w-8 h-8 font-extrabold text-gray-800 dark:text-white"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -37,15 +55,7 @@ export default function Card({ item, url }) {
             />
           </svg>
         </button>
-        {menuToggle && (
-          <div className="absolute bg-white shadow-md rounded-md p-2 right-0 top-full">
-            {/* Can't nest Links!! Bad html practice */}
-            <p>Add to today</p>
-            <p>Add to week</p>
-            <p>Add to favourite</p>
-          </div>
-        )}
       </div>
-    </Link>
+    </div>
   );
 }

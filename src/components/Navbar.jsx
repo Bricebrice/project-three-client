@@ -19,7 +19,7 @@ function Navbar() {
   return (
     <nav className="flex items-center justify-between flex-wrap py-2 px-4 bg-mantis-400">
       <NavLogo />
-      <div className="flex gap-3 items-center lg:hidden">
+      <div className="flex gap-2 md:gap-3 items-center lg:hidden">
         {/* Profile Picture with menu option pops up when user is logged in */}
         {isLoggedIn && (
           <div className="relative">
@@ -66,7 +66,7 @@ function Navbar() {
         {/* Hamburger when closed and X when open*/}
         <button
           onClick={() => setNavToggle(!navToggle)}
-          className="flex items-center px-3 py-2 rounded text-black-500 hover:text-black-400"
+          className="flex items-center sm:px-1 md:px-3 py-2 rounded text-black-500 hover:text-black-400"
         >
           <HiMenu
             className={`text-white fill-current h-8 w-8 ${
@@ -92,7 +92,7 @@ function Navbar() {
           className="text-sm lg:flex lg: items-center lg:gap-3"
         >
           {isLoggedIn && (
-            <div className="relative hidden lg:block">
+            <div className="relative hidden lg:block lg:mr-3">
               <img
                 onClick={() => {
                   setMenuToggle(!menuToggle);
@@ -149,7 +149,15 @@ function Navbar() {
             to={"/all-meals"}
             className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
           >
-            All meals
+            Meals
+          </NavLink>
+          <NavLink 
+          onClick={()=> {
+            setNavToggle(false);
+          }}
+          to={"/all-ingredients"}
+          className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1">
+            Ingredients
           </NavLink>
           {!isLoggedIn && (
             <NavLink
