@@ -46,7 +46,7 @@ export default function CreateIngredientPage() {
     try {
       const response = await ingredientService.create(form);
       console.log(response.data);
-      navigate("/ingredients");
+      navigate("/all-ingredients");
     } catch (error) {
       setErrorMessage(error.response.data.message);
     }
@@ -54,7 +54,7 @@ export default function CreateIngredientPage() {
 
   return (
     <div className="bg-mustard-100 flex flex-col h-dvh items-center">
-      <h1 className="text-3xl p-4">Create Ingredient</h1>
+      <h1 className="text-3xl p-4">Add Ingredient</h1>
 
       <form
         className="max-w-md mx-auto flex flex-col items-center mb-5 bg-mustard-400 rounded p-7"

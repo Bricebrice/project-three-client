@@ -41,7 +41,7 @@ function MealDetailsPage() {
     <>
       <Link to="/all-meals">Back</Link>
       {!foundMeal && <h3>This meal doesn't exist!</h3>}
-      {foundMeal && <CustomCard item={foundMeal} isMealDetailsPage={true} />}
+      {foundMeal && <CustomCard item={foundMeal} />}
     </>
   );
 }
