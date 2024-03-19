@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import CustomCard from "../../components/CustomCard";
 import Footer from "../../components/Footer";
 import mealService from "../../services/meal.service";
+import Card from "../../components/Card";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
@@ -35,23 +35,14 @@ function AllMealsPage() {
 
   return (
     <>
-      <section className="bg-white dark:bg-gray-900">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-          <div className="max-w-screen-xl mb-16">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
-              All Meals
-            </h2>
-          </div>
-          <div className="flex flex-wrap justify-center sm:gap-6">
-            {allMeals.map((meal) => (
-              <div
-                key={meal._id}
-                className="p-2 w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
-              >
-                <CustomCard item={meal} url="/meal" />
-              </div>
-            ))}
-          </div>
+      <section className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
+        <h2 className="mb-16 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
+          All Meals
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          {allMeals.map((meal) => {
+            return <Card key={meal._id} item={meal} url="/meal" />;
+          })}
         </div>
       </section>
       <Footer />
