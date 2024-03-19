@@ -54,6 +54,14 @@ function Navbar() {
               >
                 Edit User
               </NavLink>
+              {user.role === "admin" && (
+                <NavLink
+                  to={"/create-ingredient"}
+                  className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
+                >
+                  Add Ingredients
+                </NavLink>
+              )}
               <button
                 onClick={logOutRedirect}
                 className="text-sm text-white bg-orange-500 mx-1 mb-2 py-1 px-14 rounded text-nowrap"
