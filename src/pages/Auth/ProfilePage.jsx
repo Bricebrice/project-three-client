@@ -1,9 +1,12 @@
-function ProfilePage() {
+import ProfileHeader from "../../components/ProfileHeader";
+
+export default function ProfilePage() {
   return (
-    <div>
-      <h1>Profile Page</h1>
-    </div>
+    <>
+      <ProfileHeader />
+      <div>
+        
+      </div>
+    </>
   );
 }
-
-export default ProfilePage;
