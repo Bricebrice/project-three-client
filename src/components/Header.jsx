@@ -18,7 +18,7 @@ function Header() {
         <div className="flex  space-y-4 sm:flex-row sm:justify-left sm:space-y-0">
           <Link
             to={"/login"}
-            className="bg-orange-400 border-2 shadow border-orange-500 rounded py-2.5 px-5 hover:bg-orange-500 hover:border-orange-600 hover:border-2"
+            className="inline-flex justify-center items-center px-5 text-center text-black-800 bg-orange-400 border-2 shadow border-orange-500 rounded py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
           >
             Start now!
           </Link>

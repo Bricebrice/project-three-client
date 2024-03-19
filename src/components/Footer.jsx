@@ -130,7 +130,7 @@ function Footer() {
             <a href="/" className="hover:underline">
               VegEase Planner™
             </a>
-            . All rights reserved. Made with love ❤.
+            . All rights reserved. Made with love 💚.
           </span>
         </div>
       </div>
