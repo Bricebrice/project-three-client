@@ -41,13 +41,7 @@ function AllMealsPage() {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {allMeals.map((meal) => {
-            return (
-              <Card
-                key={meal._id}
-                item={meal}
-                url="/meal"
-              />
-            );
+            return <Card key={meal._id} item={meal} url="/meal" />;
           })}
         </div>
       </section>

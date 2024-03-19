@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
-import CustomCard from "../../components/CustomCard";
 import Footer from "../../components/Footer";
 import ingredientService from "../../services/ingredient.service";
 
