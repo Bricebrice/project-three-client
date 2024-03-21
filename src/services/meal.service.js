@@ -3,12 +3,16 @@ import axios from "axios";
 class MealService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_DEPLOYMENT_URL || "http://localhost:5005"
+      baseURL: import.meta.env.VITE_DEPLOYMENT_URL || "http://localhost:5005",
     });
   }
 
   allMeals = () => {
     return this.api.get("/meal/all-meals");
+  };
+
+  findByIngredient = (ingredientId) => {
+    return this.api.get(`/meal/meals-by-ingredient/${ingredientId}`);
   };
 
   imageUpload = (requestBody) => {

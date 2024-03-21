@@ -5,10 +5,8 @@ export default function Card({ item, url }) {
   const [menuToggle, setMenuToggle] = useState(false);
 
   const handleMenuClick = (e) => {
-    e.preventDefault();
-
     setMenuToggle(!menuToggle);
-    console.log("Menu clicked");
+    // console.log("Menu clicked");
   };
 
   return (
