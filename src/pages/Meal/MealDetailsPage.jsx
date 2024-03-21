@@ -7,6 +7,8 @@ import BackButton from "../../components/BackButton";
 import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/auth.context";
+import HeartIcon from "../../components/HeartIcon";
+import CalendarIcon from "../../components/CalendarIcon";
 
 function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
@@ -15,42 +17,52 @@ function MealDetailsPage() {
   const { isLoggedIn, user } = useContext(AuthContext);
   const { mealId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-  // console.log("meal id: ", mealId);
-
-  const fetchMeal = async () => {
-    setIsLoading(true);
-    try {
-      const response = await mealService.findById(mealId);
-      // console.log("response.data ", response.data);
-      setFoundMeal(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
+  // Fetch meal
   useEffect(() => {
+    const fetchMeal = async () => {
+      setIsLoading(true);
+      try {
+        const response = await mealService.findById(mealId);
+        setFoundMeal(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
     fetchMeal();
   }, [mealId]);
 
-  const fetchIngredients = async () => {
-    if (foundMeal) {
-      const ingredientsData = [];
-      for (const ingredient of foundMeal.ingredients) {
-        try {
-          const response = await ingredientService.findById(ingredient.item);
-          ingredientsData.push(response.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      setFoundIngredients(ingredientsData);
-    }
-  };
+  // Fetch ingredients
   useEffect(() => {
+    const fetchIngredients = async () => {
+      if (foundMeal) {
+        const ingredientsData = [];
+        for (const ingredient of foundMeal.ingredients) {
+          try {
+            const response = await ingredientService.findById(ingredient.item);
+            ingredientsData.push(response.data);
+          } catch (error) {
+            console.log(error);
+          }
+        }
+        setFoundIngredients(ingredientsData);
+      }
+    };
     fetchIngredients();
   }, [foundMeal]);
+
+  // Handle menu click
+  const handleMenuClick = () => {
+    setMenuToggle(!menuToggle);
+  };
+
+  // Handle heart click
+  const handleHeartClick = () => {
+    setIsLiked(!isLiked);
+  };
 
   if (isLoading) {
     return (
@@ -60,18 +72,9 @@ function MealDetailsPage() {
     );
   }
 
-  // if (foundMeal) {
-  //   console.log(foundMeal.creator);
-  //   console.log(user._id);
-  // }
-
   const isAuthor =
     isLoggedIn && user && foundMeal && foundMeal.creator === user._id;
-  console.log(`isAuthor: ${isAuthor}`);
-
-  const handleMenuClick = () => {
-    setMenuToggle(!menuToggle);
-  };
+  // console.log(`isAuthor: ${isAuthor}`);
 
   return (
     <>
@@ -121,7 +124,10 @@ function MealDetailsPage() {
 
               <div className="px-6 py-4 flex items-center justify-between h-20">
                 <div className="flex items-center space-x-4">
-                  <>Nothing yet</>
+                  <Link to="/">
+                    <CalendarIcon />
+                  </Link>
+                  <HeartIcon onClick={handleHeartClick} isLiked={isLiked} />
                 </div>
 
                 {menuToggle && (
