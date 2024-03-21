@@ -111,7 +111,7 @@ function IngredientDetailsPage() {
                     mealsByIngredient.map((meal) => (
                       <ul key={meal._id} className="list-disc pl-8">
                         <li className="hover:underline hover:text-blue-500">
-                          <Link to={`/meal/${meal._id}`}>{meal.name}</Link>{" "}
+                          <Link to={`/meal/${meal._id}`}>{meal.name}</Link>
                         </li>
                       </ul>
                     ))}

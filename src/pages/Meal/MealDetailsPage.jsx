@@ -30,6 +30,7 @@ function MealDetailsPage() {
       setIsLoading(true);
       try {
         const response = await mealService.findById(mealId);
+        // console.log("response.data ", response.data);
         setFoundMeal(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -110,8 +111,11 @@ function MealDetailsPage() {
                   {foundIngredients &&
                     foundIngredients.map((ingredient, _id) => (
                       <ul key={_id} className="list-disc pl-8">
-                        <li>
-                          {ingredient.quantity} {ingredient.name}
+                        <li className="hover:underline hover:text-blue-500">
+                          <Link to={`/ingredient/${ingredient._id}`}>
+                            {ingredient.name},
+                            <span> {foundMeal.ingredients[_id].quantity}g</span>
+                          </Link>
                         </li>
                       </ul>
                     ))}
