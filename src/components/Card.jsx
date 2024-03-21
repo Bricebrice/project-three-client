@@ -18,15 +18,21 @@ export default function Card({ item, url }) {
           <img
             src={item.imageUrl}
             alt="food food food"
-            className="w-full lg:h-64 h-32 rounded-t"
+            className="w-full lg:h-64 h-32 rounded-t object-cover"
           />
         </Link>
         {menuToggle && (
           <div className="absolute bg-white shadow-md rounded-md lg:left-28 bottom-0 right-1 ">
             {/* Can't nest Links!! Bad html practice */}
-            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to today</p>
-            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to week</p>
-            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">Add to favourite</p>
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
+              Add to today
+            </p>
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
+              Add to week
+            </p>
+            <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
+              Add to favourite
+            </p>
           </div>
         )}
       </div>
