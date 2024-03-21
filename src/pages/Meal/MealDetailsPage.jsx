@@ -1,23 +1,28 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+
 import NutritionDetails from "../../components/NutritionDetails";
-import mealService from "../../services/meal.service";
-import ingredientService from "../../services/ingredient.service";
 import BackButton from "../../components/BackButton";
 import Footer from "../../components/Footer";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/auth.context";
 import HeartIcon from "../../components/HeartIcon";
 import CalendarIcon from "../../components/CalendarIcon";
+
+import mealService from "../../services/meal.service";
+import ingredientService from "../../services/ingredient.service";
+
+import { AuthContext } from "../../context/auth.context";
 
 function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
   const [foundIngredients, setFoundIngredients] = useState(null);
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLoggedIn, user } = useContext(AuthContext);
-  const { mealId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
+  const { isLoggedIn, user } = useContext(AuthContext);
+
+  const { mealId } = useParams();
 
   // Fetch meal
   useEffect(() => {
@@ -91,6 +96,8 @@ function MealDetailsPage() {
                 proteins={foundMeal.proteins}
                 fats={foundMeal.fats}
                 carbs={foundMeal.carbs}
+                isLiked={isLiked}
+                onClick={handleHeartClick}
               />
 
               <hr />

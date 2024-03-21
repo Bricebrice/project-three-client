@@ -2,7 +2,9 @@ function HeartIcon({ isLiked, onClick }) {
   return (
     <svg
       className={`w-6 h-6 ${
-        isLiked ? "fill-gray-900 cursor-pointer" : "fill-white cursor-pointer"
+        isLiked
+          ? "text-red-800 fill-red-800 cursor-pointer hover:fill-red-800"
+          : "text-red-800 hover:fill-red-800 cursor-pointer"
       } dark:text-white`}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
