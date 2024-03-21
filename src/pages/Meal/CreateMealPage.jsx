@@ -1,21 +1,47 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const API_URL = "http://localhost:5005";
+import { useEffect, useState, useContext } from "react";
+import { MealContext } from "../../context/meal.context";
+import { useNavigate } from "react-router-dom";
+import ingredientService from "../../services/ingredient.service";
+import mealService from "../../services/meal.service";
+import IngredientTable from "../../components/IngredientTable";
+import SearchBar from "../../components/SearchBar";
 
 export default function CreateMealPage() {
   const [form, setForm] = useState({
     name: "",
+    description: "",
+    cookingInstructions: "",
+    ingredients: [],
     calories: 0,
     proteins: 0,
     fats: 0,
     carbs: 0,
     imageUrl: "",
   });
+
+const [allIngredients, setAllIngredients] = useState([]);
+const [recipeIngredients, setRecipeIngredients] = useState([]); 
+const [finalRecipe, setFinalRecipe] = useState([])
+
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
+
+  const getAllIngredients = async () => {
+    try {
+      const response = await ingredientService.allIngredients();
+      setAllIngredients(response.data.ingredients);
+      setIsLoading(false);
+    } catch (error) {
+      //console.log(error);
+      setErrorMessage(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllIngredients();
+  }, []);
 
   const handleChange = (e) => {
     setForm({
@@ -24,28 +50,27 @@ export default function CreateMealPage() {
     });
   };
 
+  const handleFileUpload = async (e) => {
+    try {
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", e.target.files[0]);
+      const response = await mealService.imageUpload(uploadData);
+      console.log("response: ", response.data.fileUrl);
+      setForm({
+        ...form,
+        imageUrl: response.data.fileUrl,
+      });
+    } catch (error) {
+      setErrorMessage(error.response.data.message);
+    }
+  };
+
   const handleCreateMealSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
-    // if (password !== passVerify) {
-    //   setErrorMessage("Passwords do not match");
-    //   return;
-    // }
-
-    const requestBody = { form };
-
     try {
-      const response = await axios.post(`${API_URL}/`, requestBody);
-      // console.log("Signup response:", response.data);
-      setForm({
-        email: "",
-        password: "",
-        passVerify: "",
-        firstName: "",
-        lastName: "",
-      });
-      navigate("/login");
+      const response = await mealService.create(form);
+      navigate("/all-meals");
     } catch (error) {
       if (error.response) {
         const errorDescription = error.response.data.message;
@@ -55,103 +80,145 @@ export default function CreateMealPage() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="SignupPage bg-yellow-300 flex flex-col h-dvh items-center">
-      <h1 className="text-3xl p-4">Sign Up</h1>
+    <div className="bg-mustard-100 flex flex-col h-dvh items-center">
+      <h1 className="text-3xl p-4">Add Meal</h1>
 
       <form
+        className="max-w-md mx-auto flex flex-col items-center mb-5 bg-mustard-400 rounded p-7"
         onSubmit={handleCreateMealSubmit}
-        className="max-w-sm mx-auto flex flex-col items-center mb-5 bg-yellow-400 rounded p-7"
       >
-        <div className="mb-5 flex gap-3">
-          <div>
-            <label
-              htmlFor="firstName"
-              className="block mb-2 text-sm font-medium"
-            >
-              First name:
-            </label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={form.firstName}
-              onChange={handleChange}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="lastName"
-              className="block mb-2 text-sm font-medium"
-            >
-              Last name:
-            </label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-              id="lastName"
-              type="text"
-              name="lastName"
-              value={form.lastName}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
         <div className="w-full mb-5">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium">
-            Email:
+          <label className="block mb-2 text-sm font-medium" htmlFor="name">
+            Name:
           </label>
           <input
             className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-            id="email"
-            type="email"
-            name="email"
-            value={form.email}
+            type="text"
+            name="name"
+            id="name"
+            value={form.name}
             onChange={handleChange}
           />
         </div>
-        <div className="mb-5 flex gap-3">
-          <div>
-            <label className="block mb-2 text-sm font-medium">Password:</label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
+        <div className="w-full mb-5">
+          <label
+            htmlFor="description"
+            className="block mb-2 text-sm font-medium"
+          >
+            Description:
+          </label>
+          <textarea
+            rows="2"
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
+            id="description"
+            type="description"
+            name="description"
+            value={form.description}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="w-full mb-5">
+          <label
+            htmlFor="cookingInstructions"
+            className="block mb-2 text-sm font-medium"
+          >
+            Cooking Instructions:
+          </label>
+          <textarea
+            rows="4"
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
+            id="cookingInstructions"
+            type="cookingInstructions"
+            name="cookingInstructions"
+            value={form.cookingInstructions}
+            onChange={handleChange}
+          />
+        </div>
+
+        <SearchBar allIngredients={allIngredients} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} />
+
+        <IngredientTable recipeIngredients={recipeIngredients} finalRecipe={finalRecipe} setFinalRecipe={setFinalRecipe} />
+
+        <div className="mb-5">
+          <input
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+            type="number"
+            name="calories"
+            id="calories"
+            hidden
+            value={form.calories}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-5">
+          <input
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+            type="number"
+            name="proteins"
+            id="proteins"
+            hidden
+            value={form.proteins}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-5">
+          <input
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+            type="number"
+            name="fats"
+            id="fats"
+            hidden
+            value={form.fats}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-5">
+          <input
+            className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+            type="number"
+            name="carbs"
+            id="carbs"
+            hidden
+            value={form.carbs}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-5 flex-col items-center justify-center w-full">
+          <input
+            className="mb-5 mx-auto hover:cursor-pointer"
+            type="file"
+            onChange={handleFileUpload}
+          />
+
+          {form.imageUrl === "" ? (
+            <div className="w-24 h-24 mx-auto rounded-full bg-mantis-400"></div>
+          ) : (
+            <img
+              src={form.imageUrl}
+              className="w-24 h-24 mx-auto rounded-full"
+              alt="food-image"
             />
-          </div>
-          <div>
-            <label className="block mb-2 text-sm font-medium">
-              Verify password:
-            </label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-              type="password"
-              name="passVerify"
-              value={form.passVerify}
-              onChange={handleChange}
-            />
-          </div>
+          )}
         </div>
 
         <button
           className="bg-orange-400 border-2 shadow border-orange-500 rounded w-full py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
           type="submit"
         >
-          Sign Up
+          Create Meal
         </button>
       </form>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <div className="flex gap-2">
-        <p>Already have account?</p>
-        <Link className="text-orange-700" to={"/login"}>
-          {" "}
-          Login
-        </Link>
-      </div>
     </div>
   );
 }

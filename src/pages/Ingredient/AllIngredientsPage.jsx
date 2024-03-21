@@ -10,10 +10,10 @@ export default function AllIngredientsPage() {
   const getAllIngredients = async () => {
     try {
       const response = await ingredientService.allIngredients();
-      console.log(response.data.ingredients);
+      //console.log(response.data.ingredients);
       setAllIngredients(response.data.ingredients);
       setIsLoading(false);
-      console.log(allIngredients);
+      //console.log(allIngredients);
     } catch (error) {
       console.log(error);
       setIsLoading(false);

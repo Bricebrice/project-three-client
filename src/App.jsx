@@ -14,6 +14,7 @@ import LoginPage from "./pages/Auth/LoginPage";
 import ProfilePage from "./pages/Auth/ProfilePage";
 
 import AllMealsPage from "./pages/Meal/AllMealsPage";
+import CreateMealPage from "./pages/Meal/CreateMealPage";
 import MealDetailsPage from "./pages/Meal/MealDetailsPage";
 
 import CreateIngredientPage from "./pages/Ingredient/CreateIngredientPage";
@@ -40,16 +41,20 @@ function App() {
         />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-
-        <Route path="/all-ingredients" element={<AllIngredientsPage />}/>            
+        
+        <Route path="/all-ingredients" element={<AllIngredientsPage />} />
         <Route path="/add-ingredient" element={<CreateIngredientPage />} />
-        <Route path="/ingredient/:ingredientId" element={<IngredientDetailsPage />} />
+        <Route
+          path="/ingredient/:ingredientId"
+          element={<IngredientDetailsPage />}
+        />
         <Route
           path="/edit-ingredient/:ingredientId"
           element={<EditIngredientPage />}
         />
 
         <Route path="/all-meals" element={<AllMealsPage />} />
+        <Route path="/add-meal" element={<CreateMealPage />} />
         <Route path="/meal/:mealId" element={<MealDetailsPage />} />
 
         <Route path="*" element={<ErrorPage />} />

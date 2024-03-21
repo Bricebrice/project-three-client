@@ -121,7 +121,7 @@ export default function CreateIngredientPage() {
           <input
             className="mb-5 mx-auto hover:cursor-pointer"
             type="file"
-            onChange={(e) => handleFileUpload(e)}
+            onChange={handleFileUpload}
           />
 
           {form.imageUrl === "" ? (
