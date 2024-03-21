@@ -12,8 +12,7 @@ function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
   const [foundIngredients, setFoundIngredients] = useState(null);
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-
+  const { isLoggedIn, user } = useContext(AuthContext);
   const { mealId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -21,7 +20,6 @@ function MealDetailsPage() {
 
   const fetchMeal = async () => {
     setIsLoading(true);
-
     try {
       const response = await mealService.findById(mealId);
       // console.log("response.data ", response.data);
@@ -32,7 +30,6 @@ function MealDetailsPage() {
       setIsLoading(false);
     }
   };
-
   useEffect(() => {
     fetchMeal();
   }, [mealId]);
@@ -51,7 +48,6 @@ function MealDetailsPage() {
       setFoundIngredients(ingredientsData);
     }
   };
-
   useEffect(() => {
     fetchIngredients();
   }, [foundMeal]);
@@ -63,6 +59,15 @@ function MealDetailsPage() {
       </div>
     );
   }
+
+  // if (foundMeal) {
+  //   console.log(foundMeal.creator);
+  //   console.log(user._id);
+  // }
+
+  const isAuthor =
+    isLoggedIn && user && foundMeal && foundMeal.creator === user._id;
+  console.log(`isAuthor: ${isAuthor}`);
 
   const handleMenuClick = () => {
     setMenuToggle(!menuToggle);
@@ -76,25 +81,14 @@ function MealDetailsPage() {
         {foundMeal && (
           <>
             <div className="border rounded-lg overflow-hidden shadow-lg relative">
-              <img
-                src={foundMeal.imageUrl}
-                alt={foundMeal.name}
-                className="w-full h-80 object-cover"
+              <NutritionDetails
+                name={foundMeal.name}
+                imageUrl={foundMeal.imageUrl}
+                calories={foundMeal.calories}
+                proteins={foundMeal.proteins}
+                fats={foundMeal.fats}
+                carbs={foundMeal.carbs}
               />
-              <div className="p-6">
-                <h2 className="mb-4 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">
-                  {foundMeal.name}
-                </h2>
-                <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Nutritional Information:
-                </h3>
-                <ul className="list-disc pl-8">
-                  <li>Calories: {foundMeal.calories}</li>
-                  <li>Proteins: {foundMeal.proteins}g</li>
-                  <li>Fats: {foundMeal.fats}g</li>
-                  <li>Carbs: {foundMeal.carbs}g</li>
-                </ul>
-              </div>
 
               <hr />
 
@@ -127,85 +121,74 @@ function MealDetailsPage() {
 
               <div className="px-6 py-4 flex items-center justify-between h-20">
                 <div className="flex items-center space-x-4">
-                  {isLoggedIn && (
-                    <>
-                      <Link
-                        to={`/edit/${mealId}`}
-                        className="text-white inline-flex items-center bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="mr-1 -ml-1 w-5 h-5"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
-                          <path
-                            fillRule="evenodd"
-                            d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
-                        Edit
-                      </Link>
-                      <Link
-                        to={`/delete/${mealId}`}
-                        className="inline-flex items-center text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="w-5 h-5 mr-1.5 -ml-1"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                            clipRule="evenodd"
-                          ></path>
-                        </svg>
-                        Delete
-                      </Link>
-                    </>
-                  )}
+                  <>Nothing yet</>
                 </div>
 
                 {menuToggle && (
                   <div className="absolute max-w-xs bg-white shadow-md rounded-md bottom-20 right-0">
-                    <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
-                      Add to today
-                    </p>
-                    <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
-                      Add to week
-                    </p>
-                    <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
-                      Add to favourite
-                    </p>
+                    <Link
+                      to={`/edit/${mealId}`}
+                      className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
+                    >
+                      <svg
+                        className="mr-1 -ml-1 w-5 h-5 text-primary-700"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
+                        <path
+                          fillRule="evenodd"
+                          d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      Edit
+                    </Link>
+                    <Link
+                      to={`/delete/${mealId}`}
+                      className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
+                    >
+                      <svg
+                        className="w-5 h-5 mr-1.5 -ml-1 text-red-600"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        ></path>
+                      </svg>
+                      Delete
+                    </Link>
                   </div>
                 )}
-                <button
-                  onClick={handleMenuClick}
-                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
-                >
-                  <svg
-                    className="w-8 h-8 font-extrabold text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
+
+                {isLoggedIn && isAuthor && (
+                  <button
+                    onClick={handleMenuClick}
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
                   >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeWidth="2"
-                      d="M12 6h.01M12 12h.01M12 18h.01"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      className="w-8 h-8 font-extrabold text-gray-800 dark:text-white"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeWidth="2"
+                        d="M12 6h.01M12 12h.01M12 18h.01"
+                      />
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
           </>
