@@ -23,7 +23,6 @@ function CustomCard({ item, url, isMealDetailsPage }) {
           <h5 className="sm:text-lg font-bold tracking-tight text-gray-900 dark:text-white">
             {item.name}
           </h5>
-          {isMealDetailsPage && <div className="">Hey!</div>}
           <button
             onClick={handleMenuClick}
             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"

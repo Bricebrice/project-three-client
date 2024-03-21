@@ -37,7 +37,7 @@ function AllMealsPage() {
     <>
       <section className="max-w-screen-xl mx-auto p-5 sm:p-10 md:p-16">
         <h2 className="mb-16 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
-          All Meals
+          Meals
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {allMeals.map((meal) => {
