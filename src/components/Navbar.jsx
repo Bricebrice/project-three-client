@@ -56,7 +56,7 @@ function Navbar() {
               </NavLink>
               {user.role === "admin" && (
                 <NavLink
-                  to={"/create-ingredient"}
+                  to={"/add-ingredient"}
                   className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
                 >
                   Add Ingredients
