@@ -43,9 +43,11 @@ function Navbar() {
                   {user.email}
                 </span>
 
+                <hr />
+
                 <NavLink
                   to={"/profile"}
-                  className="text-sm text-white block mx-2 mb-2 p-1 rounded hover:bg-mantis-300"
+                  className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
                 >
                   Profile
                 </NavLink>
@@ -117,13 +119,15 @@ function Navbar() {
                   <span className="text-sm text-white block m-2 p-1 text-nowrap">
                     {user.firstName + " " + user.lastName}
                   </span>
-                  <span className="text-sm text-white block mx-2 mb-2 p-1">
+                  <span className=" pb-2 text-sm text-white block mx-2 mb-2 p-1">
                     {user.email}
                   </span>
 
+                  <hr />
+
                   <NavLink
                     to={"/profile"}
-                    className="text-sm text-white block mx-2 mb-2 p-1 rounded hover:bg-mantis-300"
+                    className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
                   >
                     Profile
                   </NavLink>

@@ -34,8 +34,11 @@ export default function Card({ item, url }) {
           </div>
         )}
       </div>
-      <div className="px-6 py-4 flex items-center justify-between h-20">
-        <Link to={`${url}/${item._id}`} className="font-bold text-lg">
+      <div className="sm:p-4 p-4 flex items-center justify-between h-20">
+        <Link
+          to={`${url}/${item._id}`}
+          className="sm:font-bold font-medium sm:text-lg text-md"
+        >
           {item.name}
         </Link>
         <button
