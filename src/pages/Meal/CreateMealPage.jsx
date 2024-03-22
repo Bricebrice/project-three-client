@@ -145,7 +145,9 @@ export default function CreateMealPage() {
 
   return (
     <div className="bg-mustard-100 flex flex-col h-dvh items-center">
-      <h1 className="text-3xl p-4">Add Meal</h1>
+      <h3 className="m-16 text-4xl tracking-tight font-bold text-gray-900 dark:text-white text-center">
+        Add meal
+      </h3>
 
       <form
         className="max-w-md mx-auto flex flex-col items-center mb-5 bg-mustard-400 rounded p-7"

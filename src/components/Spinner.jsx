@@ -3,7 +3,7 @@ function VegSpinner() {
     <div className="flex items-center justify-center h-screen" role="status">
       <svg
         aria-hidden="true"
-        class="inline w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-mantis-500"
+        className="inline w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-mantis-500"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +17,7 @@ function VegSpinner() {
           fill="currentFill"
         />
       </svg>
-      <span class="sr-only">Loading...</span>
+      <span className="sr-only">Loading...</span>
     </div>
   );
 }
