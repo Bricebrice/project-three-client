@@ -19,9 +19,9 @@ export default function CreateMealPage() {
     imageUrl: "",
   });
 
-const [allIngredients, setAllIngredients] = useState([]);
-const [recipeIngredients, setRecipeIngredients] = useState([]); 
-const [finalRecipe, setFinalRecipe] = useState([])
+  const [allIngredients, setAllIngredients] = useState([]);
+  const [recipeIngredients, setRecipeIngredients] = useState([]);
+  const [finalRecipe, setFinalRecipe] = useState([]);
 
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +69,12 @@ const [finalRecipe, setFinalRecipe] = useState([])
     e.preventDefault();
 
     try {
-      const response = await mealService.create(form);
+      const response = await mealService.create({
+        ...form,
+        ingredient: recipeIngredients.map((ingredient) => {
+          return { item: ingredient.item._id, quantity: ingredient.quantity };
+        }),
+      });
       navigate("/all-meals");
     } catch (error) {
       if (error.response) {
@@ -144,9 +149,17 @@ const [finalRecipe, setFinalRecipe] = useState([])
           />
         </div>
 
-        <SearchBar allIngredients={allIngredients} setRecipeIngredients={setRecipeIngredients} recipeIngredients={recipeIngredients} />
+        <SearchBar
+          allIngredients={allIngredients}
+          setRecipeIngredients={setRecipeIngredients}
+          recipeIngredients={recipeIngredients}
+        />
 
-        <IngredientTable recipeIngredients={recipeIngredients} finalRecipe={finalRecipe} setFinalRecipe={setFinalRecipe} />
+        <IngredientTable
+          recipeIngredients={recipeIngredients}
+          finalRecipe={finalRecipe}
+          setFinalRecipe={setFinalRecipe}
+        />
 
         <div className="mb-5">
           <input
@@ -155,7 +168,16 @@ const [finalRecipe, setFinalRecipe] = useState([])
             name="calories"
             id="calories"
             hidden
-            value={form.calories}
+            value={recipeIngredients
+              .map((ingredient) => {
+                return (
+                  Math.round(
+                    ((ingredient.item.calories * ingredient.quantity) / 100) *
+                      10
+                  ) / 10
+                );
+              })
+              .reduce((acc, current) => acc + current, 0)}
             onChange={handleChange}
           />
         </div>
@@ -166,7 +188,16 @@ const [finalRecipe, setFinalRecipe] = useState([])
             name="proteins"
             id="proteins"
             hidden
-            value={form.proteins}
+            value={recipeIngredients
+              .map((ingredient) => {
+                return (
+                  Math.round(
+                    ((ingredient.item.proteins * ingredient.quantity) / 100) *
+                      10
+                  ) / 10
+                );
+              })
+              .reduce((acc, current) => acc + current, 0)}
             onChange={handleChange}
           />
         </div>
@@ -177,7 +208,15 @@ const [finalRecipe, setFinalRecipe] = useState([])
             name="fats"
             id="fats"
             hidden
-            value={form.fats}
+            value={recipeIngredients
+              .map((ingredient) => {
+                return (
+                  Math.round(
+                    ((ingredient.item.fats * ingredient.quantity) / 100) * 10
+                  ) / 10
+                );
+              })
+              .reduce((acc, current) => acc + current, 0)}
             onChange={handleChange}
           />
         </div>
@@ -188,7 +227,15 @@ const [finalRecipe, setFinalRecipe] = useState([])
             name="carbs"
             id="carbs"
             hidden
-            value={form.carbs}
+            value={recipeIngredients
+              .map((ingredient) => {
+                return (
+                  Math.round(
+                    ((ingredient.item.carbs * ingredient.quantity) / 100) * 10
+                  ) / 10
+                );
+              })
+              .reduce((acc, current) => acc + current, 0)}
             onChange={handleChange}
           />
         </div>
