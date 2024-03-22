@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import NutritionDetails from "../../components/NutritionDetails";
 import BackButton from "../../components/BackButton";
@@ -10,6 +10,7 @@ import CalendarIcon from "../../components/CalendarIcon";
 
 import mealService from "../../services/meal.service";
 import ingredientService from "../../services/ingredient.service";
+import userService from "../../services/user.service";
 
 import { AuthContext } from "../../context/auth.context";
 
@@ -19,6 +20,8 @@ function MealDetailsPage() {
   const [menuToggle, setMenuToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+
+  const navigate = useNavigate();
 
   const { isLoggedIn, user } = useContext(AuthContext);
 
@@ -32,6 +35,11 @@ function MealDetailsPage() {
         const response = await mealService.findById(mealId);
         // console.log("response.data ", response.data);
         setFoundMeal(response.data);
+        // Retrieve isLiked state from localStorage
+        const likedStatus =
+          isLoggedIn && localStorage.getItem("likedMeal:" + mealId) === "true";
+        // console.log("isLiked from localStorage:", likedStatus);
+        setIsLiked(likedStatus);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -39,7 +47,7 @@ function MealDetailsPage() {
       }
     };
     fetchMeal();
-  }, [mealId]);
+  }, [mealId, isLoggedIn]);
 
   // Fetch ingredients
   useEffect(() => {
@@ -66,8 +74,26 @@ function MealDetailsPage() {
   };
 
   // Handle heart click
-  const handleHeartClick = () => {
+  const handleHeartClick = async () => {
     setIsLiked(!isLiked);
+    if (isLoggedIn && foundMeal) {
+      try {
+        if (isLiked) {
+          // Remove from favorites if already liked
+          await userService.removeMealFromFavorites(user._id, mealId);
+          console.log("Meal removed from favorites");
+        } else {
+          // Add to favorites if not liked
+          await userService.addMealToFavorites(user._id, mealId);
+          console.log("Meal added to favorites ", mealId);
+        }
+        localStorage.setItem("likedMeal:" + mealId, !isLiked);
+      } catch (error) {
+        console.error("Error adding meal to favorites:", error);
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
   if (isLoading) {

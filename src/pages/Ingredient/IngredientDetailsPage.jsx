@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import NutritionDetails from "../../components/NutritionDetails";
 import BackButton from "../../components/BackButton";
@@ -9,6 +9,7 @@ import HeartIcon from "../../components/HeartIcon";
 
 import mealService from "../../services/meal.service";
 import ingredientService from "../../services/ingredient.service";
+import userService from "../../services/user.service";
 
 import { AuthContext } from "../../context/auth.context";
 
@@ -18,6 +19,8 @@ function IngredientDetailsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
   const [mealsByIngredient, setMealsByIngredient] = useState([]);
+
+  const navigate = useNavigate();
 
   const { isLoggedIn, user } = useContext(AuthContext);
 
@@ -30,6 +33,12 @@ function IngredientDetailsPage() {
       try {
         const response = await ingredientService.findById(ingredientId);
         setFoundIngredient(response.data);
+        // Retrieve isLiked state from localStorage
+        const likedStatus =
+          isLoggedIn &&
+          localStorage.getItem("likedIngredient:" + ingredientId) === "true";
+        // console.log("isLiked from localStorage:", likedStatus);
+        setIsLiked(likedStatus);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
@@ -37,7 +46,7 @@ function IngredientDetailsPage() {
       }
     };
     fetchIngredient();
-  }, [ingredientId]);
+  }, [ingredientId, isLoggedIn]);
 
   // Fetch meal based on ingredient
   useEffect(() => {
@@ -62,8 +71,29 @@ function IngredientDetailsPage() {
   };
 
   // Handle heart click
-  const handleHeartClick = () => {
+  const handleHeartClick = async () => {
     setIsLiked(!isLiked);
+    if (isLoggedIn && foundIngredient) {
+      try {
+        if (isLiked) {
+          // Remove from favorites if already liked
+          await userService.removeIngredientFromFavorites(
+            user._id,
+            ingredientId
+          );
+          console.log("Ingredient removed from favorites");
+        } else {
+          // Add to favorites if not liked
+          await userService.addIngredientToFavorites(user._id, ingredientId);
+          console.log("Ingredient added to favorites");
+        }
+        localStorage.setItem("likedIngredient:" + ingredientId, !isLiked);
+      } catch (error) {
+        console.error("Error adding ingredient to favorites:", error);
+      }
+    } else {
+      navigate("/login");
+    }
   };
 
   if (isLoading) {
