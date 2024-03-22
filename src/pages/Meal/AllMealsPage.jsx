@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import mealService from "../../services/meal.service";
 import Card from "../../components/Card";
+import VegSpinner from "../../components/Spinner";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
@@ -27,9 +28,9 @@ function AllMealsPage() {
 
   if (isLoading) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <>
+        <VegSpinner />
+      </>
     );
   }
 

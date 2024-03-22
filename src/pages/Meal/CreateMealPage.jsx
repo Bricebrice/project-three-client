@@ -1,9 +1,12 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ingredientService from "../../services/ingredient.service";
-import mealService from "../../services/meal.service";
+
 import IngredientTable from "../../components/IngredientTable";
 import SearchBar from "../../components/SearchBar";
+import VegSpinner from "../../components/Spinner";
+
+import ingredientService from "../../services/ingredient.service";
+import mealService from "../../services/meal.service";
 
 export default function CreateMealPage() {
   const [form, setForm] = useState({
@@ -134,9 +137,9 @@ export default function CreateMealPage() {
 
   if (isLoading) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <>
+        <VegSpinner />
+      </>
     );
   }
 
