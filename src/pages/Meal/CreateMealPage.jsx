@@ -1,5 +1,4 @@
 import { useEffect, useState, useContext } from "react";
-import { MealContext } from "../../context/meal.context";
 import { useNavigate } from "react-router-dom";
 import ingredientService from "../../services/ingredient.service";
 import mealService from "../../services/meal.service";
@@ -11,7 +10,6 @@ export default function CreateMealPage() {
     name: "",
     description: "",
     cookingInstructions: "",
-    ingredients: [],
     calories: 0,
     proteins: 0,
     fats: 0,
@@ -43,6 +41,60 @@ export default function CreateMealPage() {
     getAllIngredients();
   }, []);
 
+  useEffect(() => {
+    let proteins = recipeIngredients
+      .map((ingredient) => {
+        return (
+          Math.round(
+            ((ingredient.item.proteins * ingredient.quantity) / 100) * 10
+          ) / 10
+        );
+      })
+      .reduce((acc, current) => acc + current, 0);
+    let fats = recipeIngredients
+      .map((ingredient) => {
+        return (
+          Math.round(
+            ((ingredient.item.fats * ingredient.quantity) / 100) * 10
+          ) / 10
+        );
+      })
+      .reduce((acc, current) => acc + current, 0);
+
+    let carbs = recipeIngredients
+      .map((ingredient) => {
+        return (
+          Math.round(
+            ((ingredient.item.carbs * ingredient.quantity) / 100) * 10
+          ) / 10
+        );
+      })
+      .reduce((acc, current) => acc + current, 0);
+
+    let calories = recipeIngredients
+      .map((ingredient) => {
+        return (
+          Math.round(
+            ((ingredient.item.calories * ingredient.quantity) / 100) * 10
+          ) / 10
+        );
+      })
+      .reduce((acc, current) => acc + current, 0);
+
+    let ingredients = recipeIngredients.map((ingredient) => {
+      return { ingredient: ingredient.item._id, quantity: ingredient.quantity };
+    });
+
+    setForm({
+      ...form,
+      proteins: proteins,
+      fats: fats,
+      carbs: carbs,
+      calories: calories,
+      ingredients: ingredients,
+    });
+  }, [recipeIngredients]);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -69,12 +121,7 @@ export default function CreateMealPage() {
     e.preventDefault();
 
     try {
-      const response = await mealService.create({
-        ...form,
-        ingredient: recipeIngredients.map((ingredient) => {
-          return { item: ingredient.item._id, quantity: ingredient.quantity };
-        }),
-      });
+      const response = await mealService.create(form);
       navigate("/all-meals");
     } catch (error) {
       if (error.response) {
@@ -168,16 +215,7 @@ export default function CreateMealPage() {
             name="calories"
             id="calories"
             hidden
-            value={recipeIngredients
-              .map((ingredient) => {
-                return (
-                  Math.round(
-                    ((ingredient.item.calories * ingredient.quantity) / 100) *
-                      10
-                  ) / 10
-                );
-              })
-              .reduce((acc, current) => acc + current, 0)}
+            value={form.calories}
             onChange={handleChange}
           />
         </div>
@@ -188,16 +226,7 @@ export default function CreateMealPage() {
             name="proteins"
             id="proteins"
             hidden
-            value={recipeIngredients
-              .map((ingredient) => {
-                return (
-                  Math.round(
-                    ((ingredient.item.proteins * ingredient.quantity) / 100) *
-                      10
-                  ) / 10
-                );
-              })
-              .reduce((acc, current) => acc + current, 0)}
+            value={form.proteins}
             onChange={handleChange}
           />
         </div>
@@ -208,15 +237,7 @@ export default function CreateMealPage() {
             name="fats"
             id="fats"
             hidden
-            value={recipeIngredients
-              .map((ingredient) => {
-                return (
-                  Math.round(
-                    ((ingredient.item.fats * ingredient.quantity) / 100) * 10
-                  ) / 10
-                );
-              })
-              .reduce((acc, current) => acc + current, 0)}
+            value={form.fats}
             onChange={handleChange}
           />
         </div>
@@ -227,15 +248,7 @@ export default function CreateMealPage() {
             name="carbs"
             id="carbs"
             hidden
-            value={recipeIngredients
-              .map((ingredient) => {
-                return (
-                  Math.round(
-                    ((ingredient.item.carbs * ingredient.quantity) / 100) * 10
-                  ) / 10
-                );
-              })
-              .reduce((acc, current) => acc + current, 0)}
+            value={form.carbs}
             onChange={handleChange}
           />
         </div>
