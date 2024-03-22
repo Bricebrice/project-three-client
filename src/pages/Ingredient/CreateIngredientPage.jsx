@@ -123,7 +123,7 @@ export default function CreateIngredientPage() {
               onChange={handleChange}
             />
           </div>
-          <div className="w-full mb-5 flex-col items-center justify-center w-full">
+          <div className="w-full mb-5 flex-col items-center justify-center">
             <input
               className="mb-5 mx-auto hover:cursor-pointer"
               type="file"
