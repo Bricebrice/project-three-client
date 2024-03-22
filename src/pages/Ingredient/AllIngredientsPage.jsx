@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
+import VegSpinner from "../../components/Spinner";
+
 import ingredientService from "../../services/ingredient.service";
 
 export default function AllIngredientsPage() {
@@ -26,9 +29,9 @@ export default function AllIngredientsPage() {
 
   if (isLoading) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <>
+        <VegSpinner />
+      </>
     );
   }
 

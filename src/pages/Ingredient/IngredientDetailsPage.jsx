@@ -6,6 +6,7 @@ import NutritionDetails from "../../components/NutritionDetails";
 import BackButton from "../../components/BackButton";
 import Footer from "../../components/Footer";
 import HeartIcon from "../../components/HeartIcon";
+import VegSpinner from "../../components/Spinner";
 
 import mealService from "../../services/meal.service";
 import ingredientService from "../../services/ingredient.service";
@@ -98,9 +99,9 @@ function IngredientDetailsPage() {
 
   if (isLoading) {
     return (
-      <div>
-        <p>Loading...</p>
-      </div>
+      <>
+        <VegSpinner />
+      </>
     );
   }
 
