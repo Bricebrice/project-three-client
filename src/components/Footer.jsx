@@ -7,9 +7,13 @@ function Footer() {
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex items-center">
-              <img src={logo} className="h-8 me-2" alt="VegEase Planner Logo" />
+              <img
+                src={logo}
+                className="h-8 me-2"
+                alt="VeganEase Planner Logo"
+              />
               <span className="self-center text-2xl font-semibold whitespace-nowrap text-white">
-                VegEase Planner
+                VeganEase Planner
               </span>
             </a>
           </div>
@@ -128,7 +132,7 @@ function Footer() {
           <span className="text-sm text-gray-400 sm:text-center dark:text-gray-400">
             © 2024{" "}
             <a href="/" className="hover:underline">
-              VegEase Planner™
+              VeganEase Planner™
             </a>
             . All rights reserved. Made with love 💚.
           </span>
