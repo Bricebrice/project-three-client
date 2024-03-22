@@ -26,7 +26,7 @@ function NutritionDetails({
           Nutritional Information:
         </h3>
         <ul className="list-disc pl-8">
-          <li>Calories: {calories}</li>
+          <li>Calories: {calories}kcal</li>
           <li>Proteins: {proteins}g</li>
           <li>Fats: {fats}g</li>
           <li>Carbs: {carbs}g</li>
