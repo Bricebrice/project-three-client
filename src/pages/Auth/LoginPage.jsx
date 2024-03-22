@@ -44,9 +44,9 @@ export default function LoginPage() {
     <>
       <div className="LoginPage bg-mustard-100 flex flex-col h-dvh items-center ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
-          <div className="max-w-screen-xl mb-16">
-            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
-              Login
+          <div className="max-w-screen-xl mb-8">
+            <h2 className="mb-8 sm:mb-16 text-3xl sm:text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
+              Log in
             </h2>
           </div>
 
