@@ -97,7 +97,7 @@ function Navbar() {
       >
         <div
           id="navlink-container"
-          className="text-sm lg:flex lg: items-center lg:gap-3"
+          className="text-sm lg:flex lg: items-center lg:gap-4"
         >
           {isLoggedIn && (
             <div className="relative hidden lg:block lg:mr-3">
@@ -146,7 +146,7 @@ function Navbar() {
               setNavToggle(false);
             }}
             to={"/"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
+            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 text-center py-0.5 px-1"
           >
             Home
           </NavLink>
@@ -155,16 +155,17 @@ function Navbar() {
               setNavToggle(false);
             }}
             to={"/all-meals"}
-            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
+            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 text-center py-0.5 px-1"
           >
             Meals
           </NavLink>
-          <NavLink 
-          onClick={()=> {
-            setNavToggle(false);
-          }}
-          to={"/all-ingredients"}
-          className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1">
+          <NavLink
+            onClick={() => {
+              setNavToggle(false);
+            }}
+            to={"/all-ingredients"}
+            className="block mt-4 lg:inline-block lg:mt-0 text-white-200 text-center py-0.5 px-1"
+          >
             Ingredients
           </NavLink>
           {!isLoggedIn && (
@@ -173,7 +174,7 @@ function Navbar() {
                 setNavToggle(false);
               }}
               to={"/login"}
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 text-center py-0.5 px-1"
             >
               Log In
             </NavLink>
@@ -184,7 +185,7 @@ function Navbar() {
                 setNavToggle(false);
               }}
               to={"/signup"}
-              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 mr-4 text-center py-0.5 px-1"
+              className="block mt-4 lg:inline-block lg:mt-0 text-white-200 text-center py-0.5 px-1"
             >
               Sign Up
             </NavLink>
