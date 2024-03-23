@@ -16,6 +16,7 @@ import ProfilePage from "./pages/Auth/ProfilePage";
 import AllMealsPage from "./pages/Meal/AllMealsPage";
 import CreateMealPage from "./pages/Meal/CreateMealPage";
 import MealDetailsPage from "./pages/Meal/MealDetailsPage";
+import EditMealPage from "./pages/Meal/EditMealPage";
 
 import CreateIngredientPage from "./pages/Ingredient/CreateIngredientPage";
 import EditIngredientPage from "./pages/Ingredient/EditIngredientPage";
@@ -31,6 +32,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+        
+        {/*user Routes*/}
         <Route
           path="/profile"
           element={
@@ -41,7 +44,8 @@ function App() {
         />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
-        
+
+        {/*Ingredient Routes*/}
         <Route path="/all-ingredients" element={<AllIngredientsPage />} />
         <Route path="/add-ingredient" element={<CreateIngredientPage />} />
         <Route
@@ -53,9 +57,11 @@ function App() {
           element={<EditIngredientPage />}
         />
 
+        {/*Meal Routes*/}
         <Route path="/all-meals" element={<AllMealsPage />} />
         <Route path="/add-meal" element={<CreateMealPage />} />
         <Route path="/meal/:mealId" element={<MealDetailsPage />} />
+        <Route path="edit-meal/:mealId" element={<EditMealPage />} />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

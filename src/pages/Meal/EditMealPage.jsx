@@ -1,16 +1,19 @@
-import { useEffect, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-
-import IngredientTable from "../../components/IngredientTable";
-import SearchBar from "../../components/SearchBar";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import VegSpinner from "../../components/Spinner";
-import { AuthContext } from "../../context/auth.context";
-import ingredientService from "../../services/ingredient.service";
-import authService from "../../services/auth.service";
-import mealService from "../../services/meal.service";
 import Footer from "../../components/Footer";
+import SearchBar from "../../components/SearchBar";
+import IngredientTable from "../../components/IngredientTable";
+import mealService from "../../services/meal.service";
+import ingredientService from "../../services/ingredient.service";
+import RemoveBar from "../../components/RemoveBar";
 
-export default function CreateMealPage() {
+export default function EditMealPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
+
+  const { mealId } = useParams();
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -21,43 +24,64 @@ export default function CreateMealPage() {
     carbs: 0,
     imageUrl: "",
     ingredients: [],
-    creator: "",
   });
-
   const [allIngredients, setAllIngredients] = useState([]);
-  const [recipeIngredients, setRecipeIngredients] = useState([]);
-  const { user, setUser } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(true);
+  const [recipe, setRecipe] = useState([]);
 
-  const navigate = useNavigate();
-
-  const getAllIngredients = async () => {
+  const fetchData = async (id) => {
     try {
-      const response = await ingredientService.allIngredients();
-      const storedToken = localStorage.getItem("authToken");
-      if (storedToken) {
-        try {
-          const userResponse = await authService.verify();
-          setUser(userResponse.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      setAllIngredients(response.data.ingredients);
+      const ingredientResponse = await ingredientService.allIngredients();
+      console.log(ingredientResponse.data.ingredients);
+      setAllIngredients(ingredientResponse.data.ingredients);
+      const response = await mealService.findById(id);
+      //console.log(response.data);
+      const {
+        name,
+        description,
+        cookingInstructions,
+        calories,
+        proteins,
+        fats,
+        carbs,
+        imageUrl,
+        ingredients,
+      } = response.data;
+
+      const foundMeal = {
+        name,
+        description,
+        cookingInstructions,
+        calories,
+        proteins,
+        fats,
+        carbs,
+        imageUrl,
+        ingredients,
+      };
+      console.log(foundMeal);
+      setForm(foundMeal);
+      setRecipe(foundMeal.ingredients)
+      console.log("recipe", recipe);
       setIsLoading(false);
     } catch (error) {
-      //console.log(error);
+      console.log(error);
       setErrorMessage(error.response.data.message);
     }
   };
 
   useEffect(() => {
-    getAllIngredients();
-  }, []);
+    fetchData(mealId);
+  }, [mealId]);
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.id]: e.target.value,
+    });
+  };
 
   useEffect(() => {
-    let proteins = recipeIngredients
+    let proteins = recipe
       .map((ingredient) => {
         return (
           Math.round(
@@ -66,7 +90,7 @@ export default function CreateMealPage() {
         );
       })
       .reduce((acc, current) => acc + current, 0);
-    let fats = recipeIngredients
+    let fats = recipe
       .map((ingredient) => {
         return (
           Math.round(
@@ -76,7 +100,7 @@ export default function CreateMealPage() {
       })
       .reduce((acc, current) => acc + current, 0);
 
-    let carbs = recipeIngredients
+    let carbs = recipe
       .map((ingredient) => {
         return (
           Math.round(
@@ -86,7 +110,7 @@ export default function CreateMealPage() {
       })
       .reduce((acc, current) => acc + current, 0);
 
-    let calories = recipeIngredients
+    let calories = recipe
       .map((ingredient) => {
         return (
           Math.round(
@@ -96,14 +120,9 @@ export default function CreateMealPage() {
       })
       .reduce((acc, current) => acc + current, 0);
 
-    let ingredients = recipeIngredients.map((ingredient) => {
+    let ingredients = recipe.map((ingredient) => {
       return { item: ingredient.item._id, quantity: ingredient.quantity };
     });
-
-    let creator = "";
-    if (user) {
-      creator = user._id;
-    }
 
     setForm({
       ...form,
@@ -112,23 +131,15 @@ export default function CreateMealPage() {
       carbs: carbs,
       calories: calories,
       ingredients: ingredients,
-      creator: creator,
     });
-  }, [recipeIngredients]);
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.id]: e.target.value,
-    });
-  };
+  }, [recipe]);
 
   const handleFileUpload = async (e) => {
     try {
+      //console.log("The file to be uploaded is: ", e.target.files[0]);
       const uploadData = new FormData();
       uploadData.append("imageUrl", e.target.files[0]);
       const response = await mealService.imageUpload(uploadData);
-      console.log("response: ", response.data.fileUrl);
       setForm({
         ...form,
         imageUrl: response.data.fileUrl,
@@ -138,18 +149,13 @@ export default function CreateMealPage() {
     }
   };
 
-  const handleCreateMealSubmit = async (e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const response = await mealService.create(form);
-      navigate("/all-meals");
+      const response = await mealService.edit(mealId, form);
+      navigate(`/meal/${mealId}`);
     } catch (error) {
-      if (error.response) {
-        const errorDescription = error.response.data.message;
-        setErrorMessage(errorDescription);
-        return;
-      }
+      setErrorMessage(error.response.data.message);
     }
   };
 
@@ -166,13 +172,13 @@ export default function CreateMealPage() {
       <div className="bg-mustard-100 flex flex-col h-full items-center">
         <div className="max-w-screen-xl8">
           <h3 className="m-8 sm:m-16 text-2xl sm:text-3xl tracking-tight font-extrabold text-gray-900 dark:text-white text-center">
-            Add meal
+            Edit meal
           </h3>
         </div>
 
         <form
-          className="max-w-md mx-auto sm:max-w-full flex flex-col items-center mb-16 bg-mustard-400 rounded p-7"
-          onSubmit={handleCreateMealSubmit}
+          className="md:max-w-lg mx-auto sm:max-w-full flex flex-col items-center mb-16 bg-mustard-400 rounded p-7"
+          onSubmit={handleEditSubmit}
         >
           <div className="w-full mb-5">
             <label className="block mb-2 text-sm font-medium" htmlFor="name">
@@ -224,16 +230,15 @@ export default function CreateMealPage() {
 
           <SearchBar
             allIngredients={allIngredients}
-            setRecipeIngredients={setRecipeIngredients}
-            recipeIngredients={recipeIngredients}
+            setRecipeIngredients={setRecipe}
+            recipeIngredients={recipe}
           />
 
-          <IngredientTable
-            recipeIngredients={recipeIngredients}
-            setRecipeIngredients={setRecipeIngredients}
-          />
+          <IngredientTable recipeIngredients={recipe} setRecipeIngredients={setRecipe} />
 
-          <div className="mb-5">
+          <RemoveBar recipe={recipe} setRecipe={setRecipe} /> 
+
+          <div className="flex items-center">
             <input
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
               type="number"
@@ -243,8 +248,6 @@ export default function CreateMealPage() {
               value={form.calories}
               onChange={handleChange}
             />
-          </div>
-          <div className="mb-5">
             <input
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
               type="number"
@@ -263,6 +266,8 @@ export default function CreateMealPage() {
               value={form.fats}
               onChange={handleChange}
             />
+          </div>
+          <div className="mb-5">
             <input
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
               type="number"
@@ -272,7 +277,6 @@ export default function CreateMealPage() {
               value={form.carbs}
               onChange={handleChange}
             />
-            <input type="text" hidden id="creator" value={user._id} onChange={handleChange}/>
           </div>
           <div className="mb-5 flex-col items-center justify-center w-full">
             <input
@@ -296,7 +300,7 @@ export default function CreateMealPage() {
             className="bg-orange-400 border-2 shadow border-orange-500 rounded w-full py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
             type="submit"
           >
-            Create Meal
+            Edit Meal
           </button>
         </form>
       </div>

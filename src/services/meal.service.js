@@ -30,6 +30,10 @@ class MealService {
   deleteMeal = (mealId) => {
     return this.api.delete(`/meal/${mealId}/delete`);
   };
+
+  edit = (ingredientId, requestBody) => {
+    return this.api.put(`/meal/${ingredientId}/edit`, requestBody);
+  };
 }
 
 // Create one instance (object) of the service
