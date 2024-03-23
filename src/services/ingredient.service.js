@@ -37,8 +37,8 @@ class IngredientService {
     // return axios.put("https://veganease-api.onrender.com/ingredient/:ingredientId/edit", requestBody);
   };
 
-  deleteIngredient = (ingredientId) => {
-    return this.api.delete(`/ingredient/${ingredientId}/delete`);
+  delete = (ingredientId) => {
+    return this.api.post(`/ingredient/${ingredientId}/delete`);
   };
 }
 

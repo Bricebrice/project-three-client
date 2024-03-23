@@ -27,12 +27,12 @@ class MealService {
     return this.api.get(`/meal/${mealId}`);
   };
 
-  deleteMeal = (mealId) => {
-    return this.api.delete(`/meal/${mealId}/delete`);
+  delete = (mealId) => {
+    return this.api.post(`/meal/${mealId}/delete`);
   };
 
-  edit = (ingredientId, requestBody) => {
-    return this.api.put(`/meal/${ingredientId}/edit`, requestBody);
+  edit = (mealId, requestBody) => {
+    return this.api.put(`/meal/${mealId}/edit`, requestBody);
   };
 }
 

@@ -100,7 +100,7 @@ function IngredientDetailsPage() {
   // Handle deletion
   const handleDelete = async () => {
     try {
-      await ingredientService.deleteIngredient(ingredientId);
+      await ingredientService.delete(ingredientId);
       navigate("/all-ingredients");
     } catch (error) {
       console.log("Error deleting ingredient:", error);
@@ -204,8 +204,7 @@ function IngredientDetailsPage() {
                       </svg>
                       Edit
                     </Link>
-                    <Link
-                      to={`/ingredient/${ingredientId}/delete`}
+                    <button
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
                       onClick={handleDelete}
                     >
@@ -222,7 +221,7 @@ function IngredientDetailsPage() {
                         ></path>
                       </svg>
                       Delete
-                    </Link>
+                    </button>
                   </div>
                 )}
 

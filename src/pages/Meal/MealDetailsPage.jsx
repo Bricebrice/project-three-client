@@ -79,7 +79,7 @@ function MealDetailsPage() {
   // Handle deletion
   const handleDelete = async () => {
     try {
-      await mealService.deleteMeal(mealId);
+      await mealService.delete(mealId);
       navigate("/all-meals");
     } catch (error) {
       console.log("Error deleting meal:", error);
@@ -162,7 +162,6 @@ function MealDetailsPage() {
                     <Link
                       to={`/edit-meal/${mealId}`}
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
-                      onClick={handleDelete}
                     >
                       <svg
                         className="mr-1 -ml-1 w-5 h-5 text-primary-700"
@@ -179,9 +178,9 @@ function MealDetailsPage() {
                       </svg>
                       Edit
                     </Link>
-                    <Link
-                      to={`/meal/${mealId}/delete`}
+                    <button
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
+                      onClick={handleDelete}
                     >
                       <svg
                         className="w-5 h-5 mr-1.5 -ml-1 text-red-600"
@@ -196,7 +195,7 @@ function MealDetailsPage() {
                         ></path>
                       </svg>
                       Delete
-                    </Link>
+                    </button>
                   </div>
                 )}
 
