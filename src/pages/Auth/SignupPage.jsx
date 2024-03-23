@@ -32,7 +32,7 @@ export default function SignupPage() {
     // }
 
     try {
-      const response = authService.signup(form);
+      const response = await authService.signup(form);
       // console.log("Signup response:", response.data);
       setForm({
         email: "",
