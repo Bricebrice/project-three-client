@@ -51,6 +51,9 @@ function AuthProviderWrapper(props) {
     authenticateUser();
   }, []);
 
+  // If role is "admin"
+  const isAdmin = isLoggedIn && user && user.role === "admin";
+
   return (
     <AuthContext.Provider
       value={{
@@ -58,6 +61,7 @@ function AuthProviderWrapper(props) {
         isLoading,
         user,
         setUser,
+        isAdmin,
         storeToken,
         authenticateUser,
         logOutUser,

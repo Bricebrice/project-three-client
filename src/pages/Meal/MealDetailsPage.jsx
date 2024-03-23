@@ -22,7 +22,7 @@ function MealDetailsPage() {
 
   const navigate = useNavigate();
 
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user, isAdmin } = useContext(AuthContext);
 
   const { mealId } = useParams();
 
@@ -69,10 +69,20 @@ function MealDetailsPage() {
         }
         localStorage.setItem("likedMeal:" + mealId, !isLiked);
       } catch (error) {
-        console.error("Error adding meal to favorites:", error);
+        console.log("Error adding meal to favorites:", error);
       }
     } else {
       navigate("/login");
+    }
+  };
+
+  // Handle deletion
+  const handleDelete = async () => {
+    try {
+      await mealService.deleteMeal(mealId);
+      navigate("/all-meals");
+    } catch (error) {
+      console.log("Error deleting meal:", error);
     }
   };
 
@@ -150,8 +160,9 @@ function MealDetailsPage() {
                 {menuToggle && (
                   <div className="absolute max-w-xs bg-white shadow-md rounded-md bottom-20 right-0">
                     <Link
-                      to={`/edit/${mealId}`}
+                      to={`/edit-meal/${mealId}`}
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
+                      onClick={handleDelete}
                     >
                       <svg
                         className="mr-1 -ml-1 w-5 h-5 text-primary-700"
@@ -169,7 +180,7 @@ function MealDetailsPage() {
                       Edit
                     </Link>
                     <Link
-                      to={`/delete/${mealId}`}
+                      to={`/meal/${mealId}/delete`}
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
                     >
                       <svg
@@ -189,7 +200,7 @@ function MealDetailsPage() {
                   </div>
                 )}
 
-                {isLoggedIn && isAuthor && (
+                {isLoggedIn && (isAuthor || isAdmin) && (
                   <button
                     onClick={handleMenuClick}
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
