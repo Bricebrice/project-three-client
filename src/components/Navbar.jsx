@@ -8,7 +8,7 @@ import NavLogo from "./NavLogo";
 function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser, isAdmin } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logOutRedirect = () => {
@@ -57,7 +57,7 @@ function Navbar() {
                 >
                   Edit User
                 </NavLink>
-                {user.role === "admin" && (
+                {isAdmin && (
                   <NavLink
                     to={"/add-ingredient"}
                     className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
