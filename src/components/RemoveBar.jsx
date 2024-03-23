@@ -1,4 +1,3 @@
-import { set } from "mongoose";
 import { useState } from "react";
 import RemoveResult from "./RemoveResult";
 

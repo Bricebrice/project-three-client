@@ -32,7 +32,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        
+
         {/*user Routes*/}
         <Route
           path="/profile"
