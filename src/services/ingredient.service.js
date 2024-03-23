@@ -3,7 +3,7 @@ import axios from "axios";
 class IngredientService {
   constructor() {
     this.api = axios.create({
-      baseURL: import.meta.env.VITE_DEPLOYMENT_URL || "http://localhost:5005"
+      baseURL: import.meta.env.VITE_DEPLOYMENT_URL || "http://localhost:5005",
     });
   }
 
@@ -35,6 +35,10 @@ class IngredientService {
     return this.api.put(`/ingredient/${ingredientId}/edit`, requestBody);
     // same as
     // return axios.put("https://veganease-api.onrender.com/ingredient/:ingredientId/edit", requestBody);
+  };
+
+  deleteIngredient = (ingredientId) => {
+    return this.api.delete(`/ingredient/${ingredientId}/delete`);
   };
 }
 
