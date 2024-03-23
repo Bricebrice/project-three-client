@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { MealContext } from "../context/meal.context";
+import { useState } from "react";
+
 
 export default function SearchResult(props) {
   const { item, setQuery, setRecipeIngredients, recipeIngredients } = props;
@@ -29,7 +29,7 @@ export default function SearchResult(props) {
         onClick={() => {
           setRecipeIngredients([
             ...recipeIngredients,
-            { item: item, quantity: quantity },
+            { item: item, quantity: Number(quantity) },
           ]);
           //console.log("recipe Ingredients: ", recipeIngredients);
           setQuery("");

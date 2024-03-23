@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import IngredientTable from "../../components/IngredientTable";
 import SearchBar from "../../components/SearchBar";
 import VegSpinner from "../../components/Spinner";
-
+import { AuthContext } from "../../context/auth.context";
 import ingredientService from "../../services/ingredient.service";
 import mealService from "../../services/meal.service";
 import Footer from "../../components/Footer";
@@ -19,12 +19,13 @@ export default function CreateMealPage() {
     fats: 0,
     carbs: 0,
     imageUrl: "",
+    ingredients: [],
   });
 
   const [allIngredients, setAllIngredients] = useState([]);
   const [recipeIngredients, setRecipeIngredients] = useState([]);
   const [finalRecipe, setFinalRecipe] = useState([]);
-
+  const { user } = useContext(AuthContext)
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -86,7 +87,7 @@ export default function CreateMealPage() {
       .reduce((acc, current) => acc + current, 0);
 
     let ingredients = recipeIngredients.map((ingredient) => {
-      return { ingredient: ingredient.item._id, quantity: ingredient.quantity };
+      return { item: ingredient.item._id, quantity: ingredient.quantity };
     });
 
     setForm({
@@ -96,6 +97,7 @@ export default function CreateMealPage() {
       carbs: carbs,
       calories: calories,
       ingredients: ingredients,
+      creator: user._id
     });
   }, [recipeIngredients]);
 
