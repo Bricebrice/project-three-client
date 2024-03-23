@@ -19,9 +19,8 @@ export default function Card({ item, url }) {
             className="w-full lg:h-64 h-32 rounded-t object-cover"
           />
         </Link>
-        {menuToggle && (
+        {/* {menuToggle && (
           <div className="absolute bg-white shadow-md rounded-md lg:left-28 bottom-0 right-1 ">
-            {/* Can't nest Links!! Bad html practice */}
             <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
               Add to today
             </p>
@@ -29,10 +28,10 @@ export default function Card({ item, url }) {
               Add to week
             </p>
             <p className="p-2 hover:bg-mantis-500 hover:text-white rounded-md">
-              Add to favourite
+              Add to favouritesss
             </p>
           </div>
-        )}
+        )} */}
       </div>
       <div className="sm:p-4 p-4 flex items-center justify-between h-20">
         <Link
@@ -41,7 +40,7 @@ export default function Card({ item, url }) {
         >
           {item.name}
         </Link>
-        <button
+        {/* <button
           onClick={handleMenuClick}
           className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
         >
@@ -61,7 +60,7 @@ export default function Card({ item, url }) {
               d="M12 6h.01M12 12h.01M12 18h.01"
             />
           </svg>
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -23,8 +23,12 @@ class MealService {
     return this.api.post("/meal/create-new-meal", requestBody);
   };
 
-  findById = (ingredientId) => {
-    return this.api.get(`/meal/${ingredientId}`);
+  findById = (mealId) => {
+    return this.api.get(`/meal/${mealId}`);
+  };
+
+  deleteMeal = (mealId) => {
+    return this.api.delete(`/meal/${mealId}/delete`);
   };
 }
 

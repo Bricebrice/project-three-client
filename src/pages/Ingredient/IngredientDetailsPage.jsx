@@ -23,7 +23,7 @@ function IngredientDetailsPage() {
 
   const navigate = useNavigate();
 
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user, isAdmin } = useContext(AuthContext);
 
   const { ingredientId } = useParams();
 
@@ -90,10 +90,20 @@ function IngredientDetailsPage() {
         }
         localStorage.setItem("likedIngredient:" + ingredientId, !isLiked);
       } catch (error) {
-        console.error("Error adding ingredient to favorites:", error);
+        console.log("Error adding ingredient to favorites:", error);
       }
     } else {
       navigate("/login");
+    }
+  };
+
+  // Handle deletion
+  const handleDelete = async () => {
+    try {
+      await ingredientService.deleteIngredient(ingredientId);
+      navigate("/all-ingredients");
+    } catch (error) {
+      console.log("Error deleting ingredient:", error);
     }
   };
 
@@ -133,21 +143,38 @@ function IngredientDetailsPage() {
 
               <hr />
 
-              <div className="p-6">
-                <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
-                  Used in:
-                </h3>
-                <ul>
-                  {mealsByIngredient &&
-                    mealsByIngredient.map((meal) => (
+              {mealsByIngredient.length === 0 && (
+                <div className="p-6">
+                  <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+                    Used in:
+                  </h3>
+                  <p>This ingredient is not used in any meal.</p>
+                  {isLoggedIn && (
+                    <Link
+                      to="/add-meal"
+                      className="text-blue-500 hover:underline"
+                    >
+                      Create a new meal using this ingredient
+                    </Link>
+                  )}
+                </div>
+              )}
+              {mealsByIngredient.length > 0 && (
+                <div className="p-6">
+                  <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
+                    Used in:
+                  </h3>
+                  <ul>
+                    {mealsByIngredient.map((meal) => (
                       <ul key={meal._id} className="list-disc pl-8">
                         <li className="hover:underline hover:text-blue-500">
                           <Link to={`/meal/${meal._id}`}>{meal.name}</Link>
                         </li>
                       </ul>
                     ))}
-                </ul>
-              </div>
+                  </ul>
+                </div>
+              )}
 
               <hr />
 
@@ -159,7 +186,7 @@ function IngredientDetailsPage() {
                 {menuToggle && (
                   <div className="absolute max-w-xs bg-white shadow-md rounded-md bottom-20 right-0">
                     <Link
-                      to={`/edit/${ingredientId}`}
+                      to={`/edit-ingredient/${ingredientId}`}
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
                     >
                       <svg
@@ -178,8 +205,9 @@ function IngredientDetailsPage() {
                       Edit
                     </Link>
                     <Link
-                      to={`/delete/${ingredientId}`}
+                      to={`/ingredient/${ingredientId}/delete`}
                       className="p-2 hover:bg-mantis-500 hover:text-white rounded-md flex items-center"
+                      onClick={handleDelete}
                     >
                       <svg
                         className="w-5 h-5 mr-1.5 -ml-1 text-red-600"
@@ -198,7 +226,7 @@ function IngredientDetailsPage() {
                   </div>
                 )}
 
-                {isLoggedIn && isAuthor && (
+                {isLoggedIn && (isAuthor || isAdmin) && (
                   <button
                     onClick={handleMenuClick}
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none"
