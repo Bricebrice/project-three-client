@@ -28,7 +28,7 @@ class MealService {
   };
 
   delete = (mealId) => {
-    return this.api.post(`/meal/${mealId}/delete`);
+    return this.api.delete(`/meal/${mealId}/delete`);
   };
 
   edit = (mealId, requestBody) => {

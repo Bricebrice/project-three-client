@@ -38,7 +38,7 @@ class IngredientService {
   };
 
   delete = (ingredientId) => {
-    return this.api.post(`/ingredient/${ingredientId}/delete`);
+    return this.api.delete(`/ingredient/${ingredientId}/delete`);
   };
 }
 
