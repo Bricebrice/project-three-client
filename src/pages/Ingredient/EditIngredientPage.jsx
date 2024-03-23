@@ -4,7 +4,7 @@ import ingredientService from "../../services/ingredient.service";
 
 export default function EditIngredientPage() {
   const { ingredientId } = useParams();
-  console.log("ingredientId", ingredientId);
+  //console.log("ingredientId", ingredientId);
   const [form, setForm] = useState({
     name: "",
     calories: 0,

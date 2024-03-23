@@ -1,39 +1,40 @@
+import { set } from "mongoose";
 import { useState } from "react";
-import SearchResult from "./SearchResult";
+import RemoveResult from "./RemoveResult";
 
-export default function SearchBar(props) {
+export default function RemoveBar(props) {
   const [query, setQuery] = useState("");
-  const { allIngredients, setRecipeIngredients, recipeIngredients } = props;
+  const { setRecipe, recipe } = props;
   const searchQueryChange = (e) => {
     return setQuery(e.target.value);
   };
-  //const { allIngredients } = useContext(MealContext);
+
   return (
     <div className="w-full mb-5">
       <input
         onChange={searchQueryChange}
         type="search"
-        placeholder="Search for ingredient here..."
+        placeholder="Remove Ingredient here..."
         className="w-full text-center rounded-md"
       />
-      {allIngredients
+      {recipe
         .filter((ingredient) => {
           if (query === "") {
             return;
           } else if (
-            ingredient.name.toLowerCase().includes(query.toLowerCase())
+            ingredient.item.name.toLowerCase().includes(query.toLowerCase())
           ) {
             return ingredient;
           } else return;
         })
         .map((ingredient) => {
           return (
-            <SearchResult
-              item={ingredient}
-              key={ingredient._id}
+            <RemoveResult
+              item={ingredient.item}
+              key={ingredient.item.id + "73"}
               setQuery={setQuery}
-              setRecipeIngredients={setRecipeIngredients}
-              recipeIngredients={recipeIngredients}
+              setRecipe={setRecipe}
+              recipe={recipe}
             />
           );
         })}
