@@ -10,14 +10,12 @@ import CalendarIcon from "../../components/CalendarIcon";
 import VegSpinner from "../../components/Spinner";
 
 import mealService from "../../services/meal.service";
-import ingredientService from "../../services/ingredient.service";
 import userService from "../../services/user.service";
 
 import { AuthContext } from "../../context/auth.context";
 
 function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
-  const [foundIngredients, setFoundIngredients] = useState(null);
   const [menuToggle, setMenuToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
@@ -49,25 +47,6 @@ function MealDetailsPage() {
     };
     fetchMeal();
   }, [mealId, isLoggedIn]);
-
-  // Fetch ingredients
-  useEffect(() => {
-    const fetchIngredients = async () => {
-      if (foundMeal) {
-        const ingredientsData = [];
-        for (const ingredient of foundMeal.ingredients) {
-          try {
-            const response = await ingredientService.findById(ingredient.item);
-            ingredientsData.push(response.data);
-          } catch (error) {
-            console.log(error);
-          }
-        }
-        setFoundIngredients(ingredientsData);
-      }
-    };
-    fetchIngredients();
-  }, [foundMeal]);
 
   // Handle menu click
   const handleMenuClick = () => {
@@ -135,13 +114,13 @@ function MealDetailsPage() {
                   Ingredients
                 </h3>
                 <ul>
-                  {foundIngredients &&
-                    foundIngredients.map((ingredient, _id) => (
-                      <ul key={_id} className="list-disc pl-8">
+                  {foundMeal &&
+                    foundMeal.ingredients.map((ingredient) => (
+                      <ul key={ingredient._id} className="list-disc pl-8">
                         <li className="hover:underline hover:text-blue-500">
-                          <Link to={`/ingredient/${ingredient._id}`}>
-                            {ingredient.name},
-                            <span> {foundMeal.ingredients[_id].quantity}g</span>
+                          <Link to={`/ingredient/${ingredient.item._id}`}>
+                            {ingredient.item.name},
+                            <span> {ingredient.quantity}g</span>
                           </Link>
                         </li>
                       </ul>
