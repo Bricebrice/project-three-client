@@ -8,7 +8,7 @@ import NavLogo from "./NavLogo";
 function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser, isAdmin, user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const logOutRedirect = () => {
@@ -22,6 +22,7 @@ function Navbar() {
         <NavLogo />
         <div className="flex gap-2 md:gap-3 items-center lg:hidden">
           {/* Profile Picture with menu option pops up when user is logged in */}
+          {/* small screen profile pic */}
           {isLoggedIn && (
             <div className="relative">
               <img
@@ -37,7 +38,7 @@ function Navbar() {
                 } -left-36 top-10 rounded-md w-44`}
               >
                 <span className="text-sm text-white block m-2 p-1 text-nowrap">
-                  {user.firstName + " " + user.lastName}
+                  {user.firstName}
                 </span>
                 <span className="text-sm text-white block mx-2 mb-2 p-1">
                   {user.email}
@@ -48,11 +49,17 @@ function Navbar() {
                 <NavLink
                   to={"/profile"}
                   className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
+                  onClick={() => {
+                    setMenuToggle(!menuToggle);
+                  }}
                 >
                   Profile
                 </NavLink>
                 <NavLink
-                  to={`/profile/${user._id}`}
+                  to={`/${user._id}`}
+                  onClick={() => {
+                    setMenuToggle(!menuToggle);
+                  }}
                   className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
                 >
                   Edit User
@@ -60,6 +67,9 @@ function Navbar() {
                 {user.role === "admin" && (
                   <NavLink
                     to={"/add-ingredient"}
+                    onClick={() => {
+                      setMenuToggle(!menuToggle);
+                    }}
                     className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
                   >
                     Add Ingredients
@@ -102,6 +112,7 @@ function Navbar() {
             id="navlink-container"
             className="text-sm lg:flex lg: items-center lg:gap-4"
           >
+            {/*large screen profile pic menue*/}
             {isLoggedIn && (
               <div className="relative hidden lg:block lg:mr-3">
                 <img
@@ -128,15 +139,32 @@ function Navbar() {
                   <NavLink
                     to={"/profile"}
                     className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
+                    onClick={() => {
+                      setMenuToggle(!menuToggle);
+                    }}
                   >
                     Profile
                   </NavLink>
                   <NavLink
                     to={`/profile/${user._id}`}
                     className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
+                    onClick={() => {
+                      setMenuToggle(!menuToggle);
+                    }}
                   >
                     Edit User
                   </NavLink>
+                  {isAdmin && (
+                    <NavLink
+                      to={"/add-ingredient"}
+                      onClick={() => {
+                        setMenuToggle(!menuToggle);
+                      }}
+                      className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
+                    >
+                      Add Ingredients
+                    </NavLink>
+                  )}
                   <button
                     onClick={logOutRedirect}
                     className="text-sm text-white bg-orange-500 mx-1 mb-2 py-1 px-14 rounded text-nowrap"

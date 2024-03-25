@@ -7,6 +7,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] =useState(false)
 
   const storeToken = (token) => {
     localStorage.setItem("authToken", token);
@@ -23,6 +24,9 @@ function AuthProviderWrapper(props) {
         const response = await authService.verify();
         const userData = response.data;
         setIsLoggedIn(true);
+        if(userData.role === "admin") {
+          setIsAdmin(true)
+        }
         setUser(userData);
       } catch (error) {
         setIsLoggedIn(false);
@@ -49,10 +53,11 @@ function AuthProviderWrapper(props) {
 
   useEffect(() => {
     authenticateUser();
+    console.log(user);
   }, []);
 
   // If role is "admin"
-  const isAdmin = isLoggedIn && user && user.role === "admin";
+  
 
   return (
     <AuthContext.Provider
