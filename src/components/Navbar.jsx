@@ -26,12 +26,14 @@ function Navbar() {
           {/* Profile Picture with menu option pops up when user is logged in */}
           {/* small screen profile pic */}
           {isLoggedIn && (
-            <ProfilePicMenu
-              menuToggle={menuToggle}
-              setMenuToggle={setMenuToggle}
-              user={user}
-              logOutRedirect={logOutRedirect}
-            />
+            <div className="sm:block md:block lg:hidden">
+              <ProfilePicMenu
+                menuToggle={menuToggle}
+                setMenuToggle={setMenuToggle}
+                user={user}
+                logOutRedirect={logOutRedirect}
+              />
+            </div>
           )}
           {/* Hamburger when closed and X when open*/}
           <button
@@ -63,12 +65,14 @@ function Navbar() {
           >
             {/*large screen profile pic menue*/}
             {isLoggedIn && (
-              <ProfilePicMenu
-                menuToggle={menuToggle}
-                setMenuToggle={setMenuToggle}
-                user={user}
-                logOutRedirect={logOutRedirect}
-              />
+              <div className="sm:hidden md:hidden lg:block">
+                <ProfilePicMenu
+                  menuToggle={menuToggle}
+                  setMenuToggle={setMenuToggle}
+                  user={user}
+                  logOutRedirect={logOutRedirect}
+                />
+              </div>
             )}
             <NavLink
               onClick={() => {
