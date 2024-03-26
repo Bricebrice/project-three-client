@@ -2,16 +2,8 @@ import IngredientRow from "./IngredientRow";
 
 export default function IngredientTable(props) {
   //const { recipeIngredients } = useContext(MealContext);
-  const { recipeIngredients, setRecipeIngredient } = props;
+  const { recipeIngredients, setRecipeIngredient, allIngredients, setAllIngredients } = props;
 
-  const removeElement = async (verifier) => {
-    const filteredIngredients = await recipeIngredients.filter((ingredient) => {
-      if (verifier === ingredient.item.name) {
-        return; 
-      } else return ingredient; 
-    });
-    setRecipeIngredient(filteredIngredients)
-  };
 
   return (
     <table className="w-full text-base text-center mb-5">
@@ -44,7 +36,6 @@ export default function IngredientTable(props) {
               item={ingredient.item}
               quantity={ingredient.quantity}
               key={ingredient._id + "1"}
-              remove={removeElement}
             />
           );
         })}
@@ -64,7 +55,7 @@ export default function IngredientTable(props) {
                   ) / 10
                 );
               })
-              .reduce((acc, current) => acc + current, 0)}
+              .reduce((acc, current) => acc + current, 0).toFixed(1)}
             kcal
           </td>
           <td>
@@ -77,7 +68,7 @@ export default function IngredientTable(props) {
                   ) / 10
                 );
               })
-              .reduce((acc, current) => acc + current, 0)}
+              .reduce((acc, current) => acc + current, 0).toFixed(1)}
             g
           </td>
           <td>
@@ -89,7 +80,7 @@ export default function IngredientTable(props) {
                   ) / 10
                 );
               })
-              .reduce((acc, current) => acc + current, 0)}
+              .reduce((acc, current) => acc + current, 0).toFixed(1)}
             g
           </td>
           <td>
@@ -101,7 +92,7 @@ export default function IngredientTable(props) {
                   ) / 10
                 );
               })
-              .reduce((acc, current) => acc + current, 0)}
+              .reduce((acc, current) => acc + current, 0).toFixed(1)}
             g
           </td>
         </tr>

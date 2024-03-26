@@ -3,11 +3,11 @@ import SearchResult from "./SearchResult";
 
 export default function SearchBar(props) {
   const [query, setQuery] = useState("");
-  const { allIngredients, setRecipeIngredients, recipeIngredients } = props;
+  const { allIngredients, setRecipeIngredients, recipeIngredients, setAllIngredients } = props;
   const searchQueryChange = (e) => {
     return setQuery(e.target.value);
   };
-  //const { allIngredients } = useContext(MealContext);
+
   return (
     <div className="w-full mb-5">
       <input
@@ -34,6 +34,8 @@ export default function SearchBar(props) {
               setQuery={setQuery}
               setRecipeIngredients={setRecipeIngredients}
               recipeIngredients={recipeIngredients}
+              setAllIngredients={setAllIngredients}
+              allIngredients={allIngredients}
             />
           );
         })}

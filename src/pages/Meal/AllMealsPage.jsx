@@ -2,18 +2,16 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import mealService from "../../services/meal.service";
 import Card from "../../components/Card";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllMeals = async () => {
-    setIsLoading(true);
-
     try {
       const response = await mealService.allMeals();
-      console.log("Response meals: ", response.data.meals);
+      console.log("Response meals fetch: ", response.data.meals);
       setAllMeals(response.data.meals);
       setIsLoading(false);
     } catch (error) {

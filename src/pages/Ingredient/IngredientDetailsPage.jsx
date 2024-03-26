@@ -6,7 +6,7 @@ import NutritionDetails from "../../components/NutritionDetails";
 import BackButton from "../../components/BackButton";
 import Footer from "../../components/Footer";
 import HeartIcon from "../../components/HeartIcon";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 
 import mealService from "../../services/meal.service";
 import ingredientService from "../../services/ingredient.service";
@@ -30,7 +30,6 @@ function IngredientDetailsPage() {
   // Fetch ingredient
   useEffect(() => {
     const fetchIngredient = async () => {
-      setIsLoading(true);
       try {
         const response = await ingredientService.findById(ingredientId);
         setFoundIngredient(response.data);

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import IngredientTable from "../../components/IngredientTable";
 import SearchBar from "../../components/SearchBar";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 import { AuthContext } from "../../context/auth.context";
 import ingredientService from "../../services/ingredient.service";
 import authService from "../../services/auth.service";
@@ -65,7 +65,7 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
     let fats = recipeIngredients
       .map((ingredient) => {
         return (
@@ -74,7 +74,7 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
 
     let carbs = recipeIngredients
       .map((ingredient) => {
@@ -84,7 +84,7 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
 
     let calories = recipeIngredients
       .map((ingredient) => {
@@ -94,7 +94,7 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
 
     let ingredients = recipeIngredients.map((ingredient) => {
       return { item: ingredient.item._id, quantity: ingredient.quantity };
@@ -226,11 +226,14 @@ export default function CreateMealPage() {
             allIngredients={allIngredients}
             setRecipeIngredients={setRecipeIngredients}
             recipeIngredients={recipeIngredients}
+            setAllIngredients={setAllIngredients}
           />
 
           <IngredientTable
             recipeIngredients={recipeIngredients}
             setRecipeIngredients={setRecipeIngredients}
+            allIngredients={allIngredients}
+            setAllIngredients={setAllIngredients}
           />
 
           <div className="mb-5">

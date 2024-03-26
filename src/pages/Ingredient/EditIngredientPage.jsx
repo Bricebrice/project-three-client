@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ingredientService from "../../services/ingredient.service";
 import Footer from "../../components/Footer";
+import VegSpinner from "../../components/VegSpinner";
 
 export default function EditIngredientPage() {
   const { ingredientId } = useParams();
@@ -15,6 +16,7 @@ export default function EditIngredientPage() {
     imageUrl: "",
   });
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   const fetchData = async (id) => {
@@ -25,6 +27,7 @@ export default function EditIngredientPage() {
     let foundIngredient = { name, calories, proteins, fats, carbs, imageUrl };
     //console.log("foundIngredient", foundIngredient);
     setForm(foundIngredient);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -76,6 +79,9 @@ export default function EditIngredientPage() {
     }
   };
 
+  if (isLoading) {
+    return <VegSpinner />;
+  }
   return (
     <>
       <div className="bg-mustard-100 flex flex-col h-full items-center ">
