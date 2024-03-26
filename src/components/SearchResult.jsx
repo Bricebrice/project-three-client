@@ -42,14 +42,13 @@ export default function SearchResult(props) {
       </div>
       <p
         className="bg-mantis-600 text-white px-2 py-1 rounded-md"
-        onClick={() => {
-          setRecipeIngredients([
-            ...recipeIngredients,
-            { item: item, quantity: Number(quantity) },
-          ]);
-          editAvailableIngredients(item.name);
-          //console.log("recipe Ingredients: ", recipeIngredients);
-          setQuery("");
+        onClick={async () => {
+            setRecipeIngredients([
+              ...recipeIngredients,
+              { item: item, quantity: Number(quantity) },
+            ]);
+            //console.log("recipe Ingredients: ", recipeIngredients);
+            setQuery("");
         }}
       >
         Add me

@@ -6,7 +6,7 @@ export default function FavoriteMeals(props) {
     <section className="w-11/12 mx-auto mb-5">
       <h3>Favorite Meals here</h3>
 
-      <div>
+      <div className="flex gap-2 overflow-hidden">
         {favMeals.map((meal) => {
           return <SquareCard item={meal} key={meal._id} url="/meal"/>;
         })}
