@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 import Footer from "../../components/Footer";
 import SearchBar from "../../components/SearchBar";
 import IngredientTable from "../../components/IngredientTable";

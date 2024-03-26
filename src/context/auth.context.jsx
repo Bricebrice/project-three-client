@@ -28,6 +28,7 @@ function AuthProviderWrapper(props) {
           setIsAdmin(true)
         }
         setUser(userData);
+        return user;
       } catch (error) {
         setIsLoggedIn(false);
       }
@@ -53,7 +54,7 @@ function AuthProviderWrapper(props) {
 
   useEffect(() => {
     authenticateUser();
-    console.log(user);
+    console.log("user from context:", user);
   }, []);
 
   // If role is "admin"

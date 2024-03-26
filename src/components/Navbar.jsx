@@ -34,8 +34,8 @@ function Navbar() {
               />
               <div
                 className={`bg-mantis-600 ${
-                  menuToggle ? "absolute" : "hidden"
-                } -left-36 top-10 rounded-md w-44`}
+                  menuToggle === false ? "hidden" : "block"
+                } -left-36 top-10 rounded-md w-44 absolute`}
               >
                 <span className="text-sm text-white block m-2 p-1 text-nowrap">
                   {user.firstName}
@@ -47,7 +47,7 @@ function Navbar() {
                 <hr />
 
                 <NavLink
-                  to={"/profile"}
+                  to={`/${user._id}`}
                   className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
                   onClick={() => {
                     setMenuToggle(!menuToggle);
@@ -56,7 +56,7 @@ function Navbar() {
                   Profile
                 </NavLink>
                 <NavLink
-                  to={`/${user._id}`}
+                  to={`/${user._id}/edit`}
                   onClick={() => {
                     setMenuToggle(!menuToggle);
                   }}
@@ -76,7 +76,10 @@ function Navbar() {
                   </NavLink>
                 )}
                 <button
-                  onClick={logOutRedirect}
+                  onClick={() => {
+                    logOutRedirect();
+                    setMenuToggle(!menuToggle);
+                  }}
                   className="text-sm text-white bg-orange-500 mx-1 mb-2 py-1 px-14 rounded text-nowrap"
                 >
                   Sign Out
@@ -124,8 +127,8 @@ function Navbar() {
                 />
                 <div
                   className={`bg-mantis-600 ${
-                    menuToggle ? "absolute" : "hidden"
-                  } -left-36 top-10 rounded-md w-44`}
+                    !menuToggle ? "hidden" : "block"
+                  } -left-36 top-10 rounded-md w-44 absolute`}
                 >
                   <span className="text-sm text-white block m-2 p-1 text-nowrap">
                     {user.firstName + " " + user.lastName}
@@ -137,7 +140,7 @@ function Navbar() {
                   <hr />
 
                   <NavLink
-                    to={"/profile"}
+                    to={`/${user._id}`}
                     className="text-sm text-white block mx-2 m-2 p-1 rounded hover:bg-mantis-300"
                     onClick={() => {
                       setMenuToggle(!menuToggle);
@@ -146,7 +149,7 @@ function Navbar() {
                     Profile
                   </NavLink>
                   <NavLink
-                    to={`/profile/${user._id}`}
+                    to={`/${user._id}/edit`}
                     className="text-sm text-white block mx-2 mb-2 hover:bg-mantis-300 rounded p-1"
                     onClick={() => {
                       setMenuToggle(!menuToggle);
@@ -166,7 +169,10 @@ function Navbar() {
                     </NavLink>
                   )}
                   <button
-                    onClick={logOutRedirect}
+                    onClick={() => {
+                      logOutRedirect();
+                      setMenuToggle(!menuToggle);
+                    }}
                     className="text-sm text-white bg-orange-500 mx-1 mb-2 py-1 px-14 rounded text-nowrap"
                   >
                     Sign Out

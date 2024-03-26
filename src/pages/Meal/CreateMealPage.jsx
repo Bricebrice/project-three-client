@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import IngredientTable from "../../components/IngredientTable";
 import SearchBar from "../../components/SearchBar";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 import { AuthContext } from "../../context/auth.context";
 import ingredientService from "../../services/ingredient.service";
 import authService from "../../services/auth.service";

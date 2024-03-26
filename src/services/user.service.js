@@ -19,6 +19,18 @@ class UserService {
     });
   }
 
+  imageUpload = (requestBody) => {
+    return this.api.post("/users/image-upload", requestBody);
+  };
+
+  getFavoriteMeals = (userId) => {
+    return this.api.get(`/users/${userId}/favorite-meals`);
+  };
+
+  getFavoriteIngredients = (userId) => {
+    return this.api.get(`/users/${userId}/favorite-ingredients`);
+  };
+
   addMealToFavorites = (userId, mealId) => {
     return this.api.post(`/users/${userId}/favorites/meals`, { mealId });
   };
@@ -37,6 +49,10 @@ class UserService {
     return this.api.delete(
       `/users/${userId}/favorites/ingredients/${ingredientId}`
     );
+  };
+
+  edit = (userId, requestBody) => {
+    return this.api.put(`/users/${userId}/edit-user`, requestBody);
   };
 }
 

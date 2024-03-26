@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import Card from "../../components/Card";
 import Footer from "../../components/Footer";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 
 import ingredientService from "../../services/ingredient.service";
 

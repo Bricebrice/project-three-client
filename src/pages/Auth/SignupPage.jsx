@@ -25,12 +25,6 @@ export default function SignupPage() {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
-    // if (password !== passVerify) {
-    //   setErrorMessage("Passwords do not match");
-    //   return;
-    // }
-
     try {
       const response = await authService.signup(form);
       // console.log("Signup response:", response.data);

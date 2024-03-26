@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Footer from "../../components/Footer";
 import mealService from "../../services/meal.service";
 import Card from "../../components/Card";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -12,6 +12,7 @@ import ErrorPage from "./pages/ErrorPage";
 import SignupPage from "./pages/Auth/SignupPage";
 import LoginPage from "./pages/Auth/LoginPage";
 import ProfilePage from "./pages/Auth/ProfilePage";
+import EditProfilePage from "./pages/Auth/EditProfilePage";
 
 import AllMealsPage from "./pages/Meal/AllMealsPage";
 import CreateMealPage from "./pages/Meal/CreateMealPage";
@@ -22,6 +23,7 @@ import CreateIngredientPage from "./pages/Ingredient/CreateIngredientPage";
 import EditIngredientPage from "./pages/Ingredient/EditIngredientPage";
 import AllIngredientsPage from "./pages/Ingredient/AllIngredientsPage";
 import IngredientDetailsPage from "./pages/Ingredient/IngredientDetailsPage";
+
 
 console.log("vite env: ", import.meta.env);
 
@@ -34,6 +36,9 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         {/*user Routes*/}
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
         <Route
           path="/profile"
           element={
@@ -42,8 +47,6 @@ function App() {
             </IsPrivate>
           }
         />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
 
         {/*Ingredient Routes*/}
         <Route path="/all-ingredients" element={<AllIngredientsPage />} />
@@ -61,7 +64,7 @@ function App() {
         <Route path="/all-meals" element={<AllMealsPage />} />
         <Route path="/add-meal" element={<CreateMealPage />} />
         <Route path="/meal/:mealId" element={<MealDetailsPage />} />
-        <Route path="edit-meal/:mealId" element={<EditMealPage />} />
+        <Route path="/edit-meal/:mealId" element={<EditMealPage />} />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

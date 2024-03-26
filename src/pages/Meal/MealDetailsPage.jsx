@@ -7,7 +7,7 @@ import BackButton from "../../components/BackButton";
 import Footer from "../../components/Footer";
 import HeartIcon from "../../components/HeartIcon";
 import CalendarIcon from "../../components/CalendarIcon";
-import VegSpinner from "../../components/Spinner";
+import VegSpinner from "../../components/VegSpinner";
 
 import mealService from "../../services/meal.service";
 import userService from "../../services/user.service";
