@@ -30,7 +30,6 @@ function IngredientDetailsPage() {
   // Fetch ingredient
   useEffect(() => {
     const fetchIngredient = async () => {
-      setIsLoading(true);
       try {
         const response = await ingredientService.findById(ingredientId);
         setFoundIngredient(response.data);

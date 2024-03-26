@@ -1,8 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { MealContext } from "../context/meal.context";
+
 
 export default function IngredientRow(props) {
-  const { item, quantity, remove } = props;
+  const { item, quantity } = props;
   //const { recipeIngredient, setRecipeIngredient } = useContext(MealContext);
 
   //console.log(recipeIngredient)

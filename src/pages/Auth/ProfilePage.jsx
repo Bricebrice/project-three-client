@@ -14,7 +14,7 @@ export default function ProfilePage() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
-    console.log(user._id);
+    console.log("fetch data profile: ", user._id);
     const mealResponse = await userService.getFavoriteMeals(user._id);
     setFavMeals(mealResponse.data.favMeals);
     const ingredientResponse = await userService.getFavoriteIngredients(

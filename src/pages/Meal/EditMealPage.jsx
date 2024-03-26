@@ -89,7 +89,7 @@ export default function EditMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
     let fats = recipe
       .map((ingredient) => {
         return (
@@ -98,7 +98,7 @@ export default function EditMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
 
     let carbs = recipe
       .map((ingredient) => {
@@ -118,7 +118,7 @@ export default function EditMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0);
+      .reduce((acc, current) => acc + current, 0).toFixed(1);
 
     let ingredients = recipe.map((ingredient) => {
       return { item: ingredient.item._id, quantity: ingredient.quantity };

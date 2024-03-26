@@ -1,4 +1,3 @@
-
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -24,7 +23,6 @@ import EditIngredientPage from "./pages/Ingredient/EditIngredientPage";
 import AllIngredientsPage from "./pages/Ingredient/AllIngredientsPage";
 import IngredientDetailsPage from "./pages/Ingredient/IngredientDetailsPage";
 
-
 console.log("vite env: ", import.meta.env);
 
 function App() {
@@ -39,14 +37,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
-        <Route
-          path="/profile"
-          element={
-            <IsPrivate>
-              <ProfilePage />
-            </IsPrivate>
-          }
-        />
+        <Route path="/profile" element={<ProfilePage />} />
 
         {/*Ingredient Routes*/}
         <Route path="/all-ingredients" element={<AllIngredientsPage />} />

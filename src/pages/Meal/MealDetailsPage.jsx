@@ -17,7 +17,7 @@ import { AuthContext } from "../../context/auth.context";
 function MealDetailsPage() {
   const [foundMeal, setFoundMeal] = useState(null);
   const [menuToggle, setMenuToggle] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [isLiked, setIsLiked] = useState(false);
 
   const navigate = useNavigate();
@@ -29,7 +29,6 @@ function MealDetailsPage() {
   // Fetch meal
   useEffect(() => {
     const fetchMeal = async () => {
-      setIsLoading(true);
       try {
         const response = await mealService.findById(mealId);
         // console.log("response.data ", response.data);
