@@ -11,15 +11,6 @@ export default function SearchResult(props) {
   } = props;
   const [quantity, setQuantity] = useState(100);
 
-  const editAvailableIngredients = async (verifier) => {
-    const filteredIngredients = await allIngredients.filter((ingredient) => {
-      if (verifier === ingredient.item.name) {
-        return;
-      } else return ingredient;
-    });
-    setAllIngredients(filteredIngredients);
-  };
-
   // const { recipeIngredients, setRecipeIngredients } = useContext(MealContext);
   return (
     <div className="h-12 w-full mx-auto flex bg-white items-center justify-center gap-3">
@@ -43,12 +34,20 @@ export default function SearchResult(props) {
       <p
         className="bg-mantis-600 text-white px-2 py-1 rounded-md"
         onClick={async () => {
+          const nameArray = await recipeIngredients.map((ingredient) => {
+            return ingredient.item.name
+          })
+          console.log(nameArray);
+          if (nameArray.includes(item.name)) {
+            return; 
+          } else {
             setRecipeIngredients([
               ...recipeIngredients,
               { item: item, quantity: Number(quantity) },
             ]);
             //console.log("recipe Ingredients: ", recipeIngredients);
             setQuery("");
+          }
         }}
       >
         Add me

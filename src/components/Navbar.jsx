@@ -26,7 +26,7 @@ function Navbar() {
           {/* Profile Picture with menu option pops up when user is logged in */}
           {/* small screen profile pic */}
           {isLoggedIn && (
-            <div className="sm:block md:block lg:hidden">
+            <div className="xs:block sm:block md:block lg:hidden">
               <ProfilePicMenu
                 menuToggle={menuToggle}
                 setMenuToggle={setMenuToggle}
@@ -65,7 +65,7 @@ function Navbar() {
           >
             {/*large screen profile pic menue*/}
             {isLoggedIn && (
-              <div className="sm:hidden md:hidden lg:block">
+              <div className="hidden lg:block">
                 <ProfilePicMenu
                   menuToggle={menuToggle}
                   setMenuToggle={setMenuToggle}
