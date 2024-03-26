@@ -10,6 +10,7 @@ function Navbar() {
   const [navToggle, setNavToggle] = useState(false);
   const [menuToggle, setMenuToggle] = useState(false);
   const { isLoggedIn, logOutUser, isAdmin, user } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const logOutRedirect = () => {
