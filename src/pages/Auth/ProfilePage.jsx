@@ -37,7 +37,7 @@ export default function ProfilePage() {
     <>
       <div className="bg-yellow-100 py-8">
         <ProfileHeader />
-        <div className="container mx-auto px-4 py-8 lg:py-12">
+        <div className="container mx-auto px-4 py-8 lg:py-12 flex justify-center">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
             <div className="bg-mantis-100 rounded-md px-6 py-8 lg:max-w-lg">
               <FavoriteMeals favMeals={favMeals} />
@@ -50,7 +50,7 @@ export default function ProfilePage() {
             </div>
           </div>
         </div>
-        <div className="bg-mantis-100 lg:w-1/2 w-11/12 rounded-md flex flex-col items-center text-center lg:max-w-lg mx-auto mb-16">
+        <div className="bg-mantis-100 w-full rounded-md flex flex-col items-center text-center lg:max-w-lg mx-auto mb-16">
           <h3 className="text-2xl font-bold text-gray-900 m-6">
             Calendar coming soon!
           </h3>
