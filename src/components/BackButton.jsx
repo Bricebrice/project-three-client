@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
 
 function BackButton({ parentUrl }) {
+  const backButtonText =
+    parentUrl === "/all-ingredients"
+      ? "Back to all ingredients"
+      : "Back to all meals";
+
   return (
     <div className="py-4 px-4 mx-auto max-w-2xl lg:py-4 flex items-center text-gray-500 dark:text-gray-400 hover:underline">
       <div className="flex items-center">
@@ -22,7 +27,7 @@ function BackButton({ parentUrl }) {
               d="M5 12h14M5 12l4-4m-4 4 4 4"
             />
           </svg>
-          <span>Back</span>
+          <span>{backButtonText}</span>
         </Link>
       </div>
     </div>
