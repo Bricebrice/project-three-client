@@ -6,6 +6,7 @@ import IsPrivate from "./utils/IsPrivate";
 import IsAnon from "./utils/IsAnon";
 import IsAdmin from "./utils/IsAdmin";
 import IsUser from "./utils/isUser";
+import IsCreatorOrIsAdmin from "./utils/IsCreatorOrIsAdmin";
 import HomePage from "./pages/HomePage";
 
 import ErrorPage from "./pages/ErrorPage";
@@ -104,7 +105,14 @@ function App() {
           }
         />
         <Route path="/meal/:mealId" element={<MealDetailsPage />} />
-        <Route path="/edit-meal/:mealId" element={<EditMealPage />} />
+        <Route
+          path="/edit-meal/:mealId"
+          element={
+            <IsCreatorOrIsAdmin>
+              <EditMealPage />
+            </IsCreatorOrIsAdmin>
+          }
+        />
 
         <Route path="*" element={<ErrorPage />} />
       </Routes>

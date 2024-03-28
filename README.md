@@ -2,27 +2,27 @@
 
 ## Description
 
-VeganEase Planner simplifies meal planning by allowing users to create and save vegan meals with community-contributed ingredients. A future calendar feature planned.
+VeganEase Planner simplifies meal planning by allowing users to create and save vegan meals with community-contributed ingredients, all while maintaining a focus on their fitness goals with macros. Planned for the future are a calendar feature where users can add their meals to and a daily, weekly, and personal macros management system.
 
 ## User Stories
 
-- **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist so that I know it's my fault
-- **Signup:** As an anon I can sign up in the platform so that I can start saving favorite restaurants
-- **Login:** As a user I can login to the platform so that I can see my favorite restaurants
+- **404:** As an anon/user I can see a 404 page if I try to reach a page that does not exist.
+- **Signup:** As an anon I can sign up to the platform so that I can start my VeganEase journey.
+- **Login:** As a user I can login to the platform so that I best interact with it and my profile.
 - **Logout:** As a user I can logout from the platform so no one else can use it
-- **Add Meals** As a user I can add a restaurant so that I can share it with the community
-- **Add Ingredients to Meals** As a user I want to create meals using available ingredients so so that I can share it with the community
-- **List Meals** As a user I want to see the restaurants so that I can choose one to eat
-- **Edit Meals** As a meal author I can edit a meal so that I can be as accurate as possible
-- **Delete Meals** As a meal author I can delete a meal so that it's no longer available
-- **Add Ingredients** As an admin I can add a restaurant so that I can share it with the community
-- **List Ingredients** As a user I want to see the restaurants so that I can choose one to eat
-- **Edit Ingredients** As an admin I can edit an ingredient so that I can be as accurate as possible
-- **Delete Ingredients** As an admin I can delete an ingredient so that it's no longer available
-- **Add meals/ingredients to favorites** As a user I want to add a restaurant to favorite so that I can save the restaurants that I liked the most
-- **See my favorites** As a user I want to see my favorite restaurantes so that I can see the ones I liked the most
-- **Contact form** As a user I want to send an email to VeganEase Planner authors so that I can contact them
-- **Profile Page** As a user I can edit my user so that I have an unique profile
+- **Add Meals** As a user I can add my favorite recipes so that I can share it with the community.
+- **Add Ingredients to Meals** As a user I want to create meals using available ingredients (or contact form should the ingredient be missing).
+- **List Meals** As a user I want to see and search all the meals so that I can choose one to eat.
+- **Edit Meals** As a meal author I can edit a meal to best fit my liking / fitness goals.
+- **Delete Meals** As a meal author I can delete a meal so that it's no longer available.
+- **Add Ingredients** As an admin I can add the ingredients suggested to me by the community.
+- **List Ingredients** As a user I want to see all the ingredients available to me.
+- **Edit Ingredients** As an admin I can edit an ingredient so that it can be as accurate as possible
+- **Delete Ingredients** As an admin I can delete an ingredient so that it's no longer available.
+- **Add meals/ingredients to favorites** As a user I want to add and easily access my favorites directly from my profile page.
+- **See my favorites** As a user I want to see my favorite so that I can see the ones I liked the most
+- **Contact form** As a user I can send an email to VeganEase Planner authors so that I offer feedback / ask for ingredients;
+- **Profile Page** As a user I can edit my user information so that I have an unique profile
 - **Roles** As a moderator I can choose who is a "user" or "admin" so that I can handle the authorizations
 
 ## Backlog
@@ -52,19 +52,19 @@ Search Meals:
 ## Routes
 
 - / - Homepage
-- /auth/signup - Signup form
-- /auth/login - Login form
+- /signup - Signup form
+- /login - Login form
 - /contact - Contact form
-- /users/profile - my favorite meal
-- /users/edit-profile - edit user profile
-- /meal/all-meals - meals list
-- /meal/:id - meal detail
-- /meal/add-meal - meal form
-- /meal/edit-meal/:id - edit meal form
-- /ingredient/all-ingredients - ingredients list
-- /ingredient/:id - ingredient detail
-- /ingredient/add-ingredient - ingredient form
-- /ingredient/edit-ingredient/:id - edit ingredient form
+- /profile - my favorite meal
+- /edit-profile/:userID - edit user profile
+- /all-meals - meals list
+- /meal/:mealId - meal detail
+- /add-meal - meal form
+- /edit-meal/:id - edit meal form
+- /all-ingredients - ingredients list
+- /ingredient/:ingredientId - ingredient detail
+- /add-ingredient - ingredient form
+- /edit-ingredient/:id - edit ingredient form
 - 404
 
 ## Pages
@@ -78,10 +78,10 @@ Search Meals:
 - Meal Detail Page (public)
 - Ingredients List Page (public)
 - Ingredient Create (admin only)
-- Ingredient Edit (admin and user)
+- Ingredient Edit (admin only)
 - Ingredient Detail Page (public)
 - My Profile Page (user only)
-- Profile Edit
+- Profile Edit (user only)
 - 404 Page (public)
 
 ## Components
@@ -116,6 +116,14 @@ Search Meals:
 - Testimonial
 - Testimonials
 - VegSpinner
+
+## Utils
+
+- IsAnon
+- IsPrivate
+- IsUser
+- IsCreatorOrIsAdmin
+- IsAdmin
 
 ## Services
 

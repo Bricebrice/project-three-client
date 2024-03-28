@@ -32,7 +32,7 @@ export default function SearchResult(props) {
         <p>g</p>
       </div>
       <p
-        className="bg-mantis-600 text-white px-2 py-1 rounded-md"
+        className="bg-mantis-600 text-white px-2 py-1 rounded-md cursor-pointer"
         onClick={async () => {
           const nameArray = await recipeIngredients.map((ingredient) => {
             return ingredient.item.name
