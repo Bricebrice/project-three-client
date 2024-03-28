@@ -1,8 +1,11 @@
 import homePageImage from "../assets/veganFood.jpg";
+import AuthContext from "../context/auth.context";
+import { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
 function Header() {
+  const { isLoggedIn } = useContext(AuthContext);
   return (
     <section
       className="bg-center bg-cover bg-no-repeat"
@@ -17,13 +20,22 @@ function Header() {
         <p className="md:max-w-full max-w-48 mb-8 text-lg font-normal text-black-800 lg:text-xl  ">
           Simplify your meal planning today
         </p>
-        <div className="flex  space-y-4 sm:flex-row sm:justify-left sm:space-y-0">
-          <Link
-            to={"/login"}
-            className="inline-flex justify-center items-center px-5 text-center text-black-800 bg-orange-400 border-2 shadow border-orange-500 rounded py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
-          >
-            Start now!
-          </Link>
+        <div className="flex space-y-4 sm:flex-row sm:justify-left sm:space-y-0">
+          {isLoggedIn ? (
+            <Link
+              to={"/all-meals"}
+              className="inline-flex justify-center items-center px-5 text-center text-black-800 bg-orange-400 border-2 shadow border-orange-500 rounded py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
+            >
+              Start now!
+            </Link>
+          ) : (
+            <Link
+              to={"/login"}
+              className="inline-flex justify-center items-center px-5 text-center text-black-800 bg-orange-400 border-2 shadow border-orange-500 rounded py-2.5 hover:bg-orange-600 hover:border-orange-700 hover:border-2"
+            >
+              Start now!
+            </Link>
+          )}
         </div>
       </div>
     </section>
