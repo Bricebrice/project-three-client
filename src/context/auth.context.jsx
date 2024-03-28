@@ -23,23 +23,22 @@ function AuthProviderWrapper(props) {
         // We must send the JWT token in the request's "Authorization" Headers
         const response = await authService.verify();
         const userData = response.data;
-        setIsLoggedIn(true);
+        await setIsLoggedIn(true);
         if (userData.role === "admin") {
-          setIsAdmin(true);
+          await setIsAdmin(true);
         }
-        setUser(userData);
-        return user;
+        await setUser(userData);
       } catch (error) {
         setIsLoggedIn(false);
       }
     } else {
       // If the token is not available
-      setIsLoggedIn(false);
-      setUser(null);
+      await setIsLoggedIn(false);
+      await setUser(null);
     }
 
     // Set loading state to false after the authentication process is completed
-    setIsLoading(false);
+    await setIsLoading(false);
   };
 
   const removeToken = () => {
@@ -55,7 +54,6 @@ function AuthProviderWrapper(props) {
   useEffect(() => {
     authenticateUser();
   }, []);
-
 
   return (
     <AuthContext.Provider

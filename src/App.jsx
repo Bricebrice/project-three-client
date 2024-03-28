@@ -2,8 +2,10 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Navbar from "./components/Navbar";
-import IsPrivate from "./components/IsPrivate";
-import IsAnon from "./components/IsAnon";
+import IsPrivate from "./utils/IsPrivate";
+import IsAnon from "./utils/IsAnon";
+import IsAdmin from "./utils/IsAdmin";
+import IsUser from "./utils/isUser";
 import HomePage from "./pages/HomePage";
 
 import ErrorPage from "./pages/ErrorPage";
@@ -34,26 +36,73 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         {/*user Routes*/}
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/edit-profile/:userId" element={<EditProfilePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
+
+        <Route
+          path="/signup"
+          element={
+            <IsAnon>
+              <SignupPage />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <IsAnon>
+              <LoginPage />
+            </IsAnon>
+          }
+        />
+        <Route
+          path="/edit-profile/:userId"
+          element={
+            <IsUser>
+              <EditProfilePage />
+            </IsUser>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              <ProfilePage />
+            </IsPrivate>
+          }
+        />
 
         {/*Ingredient Routes*/}
         <Route path="/all-ingredients" element={<AllIngredientsPage />} />
-        <Route path="/add-ingredient" element={<CreateIngredientPage />} />
+        <Route
+          path="/add-ingredient"
+          element={
+            <IsAdmin>
+              <CreateIngredientPage />
+            </IsAdmin>
+          }
+        />
         <Route
           path="/ingredient/:ingredientId"
           element={<IngredientDetailsPage />}
         />
         <Route
           path="/edit-ingredient/:ingredientId"
-          element={<EditIngredientPage />}
+          element={
+            <IsAdmin>
+              <EditIngredientPage />
+            </IsAdmin>
+          }
         />
 
         {/*Meal Routes*/}
         <Route path="/all-meals" element={<AllMealsPage />} />
-        <Route path="/add-meal" element={<CreateMealPage />} />
+        <Route
+          path="/add-meal"
+          element={
+            <IsPrivate>
+              <CreateMealPage />
+            </IsPrivate>
+          }
+        />
         <Route path="/meal/:mealId" element={<MealDetailsPage />} />
         <Route path="/edit-meal/:mealId" element={<EditMealPage />} />
 

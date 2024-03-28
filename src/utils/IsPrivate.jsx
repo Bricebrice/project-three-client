@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Navigate } from "react-router-dom";
 
-import VegSpinner from "./VegSpinner";
-
+import VegSpinner from "../components/VegSpinner";
 
 function IsPrivate({ children }) {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
