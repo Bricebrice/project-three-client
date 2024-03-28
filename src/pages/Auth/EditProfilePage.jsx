@@ -84,32 +84,38 @@ export default function EditProfilePage() {
               alt="food-image"
             />
             <input
-              className="mb-5 mx-auto hover:cursor-pointer"
+              className="m-5 mx-auto hover:cursor-pointer"
               type="file"
               onChange={handleFileUpload}
             />
           </div>
-          <div className="mb-5 flex gap-2 items-center">
-            <label className="block mb-2 text-sm font-medium" htmlFor="email">
-              First Name:
-            </label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5 "
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={form.firstName}
-              onChange={handleChange}
-            />
-            <label className="block mb-2 text-sm font-medium">Last Name:</label>
-            <input
-              className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
-              type="text"
-              name="lastName"
-              id="lastName"
-              value={form.lastName}
-              onChange={handleChange}
-            />
+          <div className="flex flex-wrap justify-between mb-5">
+            <div className="w-full md:w-1/2 mb-5 md:mb-0 md:pr-2">
+              <label className="block mb-2 text-sm font-medium" htmlFor="email">
+                First Name:
+              </label>
+              <input
+                className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={form.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="w-full md:w-1/2">
+              <label className="block mb-2 text-sm font-medium">
+                Last Name:
+              </label>
+              <input
+                className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={form.lastName}
+                onChange={handleChange}
+              />
+            </div>
           </div>
           <div className="mb-5"></div>
 
