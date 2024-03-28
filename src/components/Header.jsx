@@ -1,5 +1,5 @@
 import homePageImage from "../assets/veganFood.jpg";
-import AuthContext from "../context/auth.context";
+import { AuthContext } from "../context/auth.context";
 import { useContext } from "react";
 
 import { Link } from "react-router-dom";
