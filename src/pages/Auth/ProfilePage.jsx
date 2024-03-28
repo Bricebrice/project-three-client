@@ -6,7 +6,7 @@ import userService from "../../services/user.service";
 import VegSpinner from "../../components/VegSpinner";
 import Footer from "../../components/Footer";
 import { AuthContext } from "../../context/auth.context";
-import logo from "../../assets/logo.png"
+import logo from "../../assets/logo.png";
 
 export default function ProfilePage() {
   const { user } = useContext(AuthContext);
@@ -48,12 +48,12 @@ export default function ProfilePage() {
           <div className="bg-mantis-100 lg:w-1/2 w-11/12 rounded-md flex flex-col items-center text-center lg:max-w-lg">
             <h1 className="text-3xl mx-3 my-2">Coming soon!</h1>
             <p className="text-lg mx-3 mb-5">
-              We ask for your patience as we are still develping our calendar
+              We ask for your patience as we are still developing our calendar
               functionality. Stay tuned and in touch as we continue to grow our
               project!
             </p>
             <div className="bg-white rounded-md w-48 h-48 flex items-center justify-center mb-5">
-              <img src={logo} alt="" className="w-32 h-32"/>
+              <img src={logo} alt="" className="w-32 h-32" />
             </div>
           </div>
         </div>
