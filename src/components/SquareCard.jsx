@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 
-export default function SquareCard(props) {
-  const { item, url } = props;
+export default function SquareCard({ item, url }) {
   return (
-
-    <Link className="text-middle relative flex w-32 h-32" to={`${url}/${item._id}`}>
-        <img src={item.imageUrl} alt="" className="w-32 h-32 rounded-md"/>
-      <span className="bg-black text-white w-32 text-center text-xs absolute top-14">{item.name}</span>
+    <Link
+      to={`${url}/${item._id}`}
+      className="relative flex flex-col items-center justify-center w-32 h-32 hover:opacity-80"
+    >
+      <img
+        src={item.imageUrl}
+        alt={item.name}
+        className="w-32 h-32 rounded-md object-cover"
+      />
+      <span className="absolute bottom-0 bg-white text-black w-full text-center text-xs py-1 rounded-b ">
+        {item.name}
+      </span>
     </Link>
   );
 }

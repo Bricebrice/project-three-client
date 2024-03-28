@@ -34,32 +34,37 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="">
-      <div className="bg-yellow-100 py-10">
+    <>
+      <div className="bg-yellow-100 py-8">
         <ProfileHeader />
-        <div className="flex flex-col lg:flex-row gap-5 lg:gap-1 w-full items-center lg:justify-center lg:items-baseline pb-24">
-          <div className="bg-mantis-100 lg:w-1/2 rounded-md mx-2 py-3 w-11/12 lg:max-w-lg">
-            <FavoriteMeals favMeals={favMeals} />
-            <FavoriteIngredients
-              favIngredients={favIngredients}
-              url="/ingredient"
-            />
-          </div>
-          <div className="bg-mantis-100 lg:w-1/2 w-11/12 rounded-md flex flex-col items-center text-center lg:max-w-lg">
-            <h1 className="text-3xl mx-3 my-2">Coming soon!</h1>
-            <p className="text-lg mx-3 mb-5">
-              We ask for your patience as we are still developing our calendar
-              functionality. Stay tuned and in touch as we continue to grow our
-              project!
-            </p>
-            <div className="bg-white rounded-md w-48 h-48 flex items-center justify-center mb-5">
-              <img src={logo} alt="" className="w-32 h-32" />
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="bg-mantis-100 rounded-md px-6 py-8 lg:max-w-lg">
+              <FavoriteMeals favMeals={favMeals} />
+            </div>
+            <div className="bg-mantis-100 rounded-md px-6 py-8 lg:max-w-lg">
+              <FavoriteIngredients
+                favIngredients={favIngredients}
+                url="/ingredient"
+              />
             </div>
           </div>
         </div>
+        <div className="bg-mantis-100 lg:w-1/2 w-11/12 rounded-md flex flex-col items-center text-center lg:max-w-lg mx-auto mb-16">
+          <h3 className="text-2xl font-bold text-gray-900 m-6">
+            Calendar coming soon!
+          </h3>
+          <p className="text-lg mx-3 mb-5">
+            We ask for your patience as we are still developing our calendar
+            functionality. Stay tuned and in touch as we continue to grow our
+            project!
+          </p>
+          <div className="rounded-md mb-6 flex items-center justify-center">
+            <img src={logo} alt="" className="w-20  h-20" />
+          </div>
+        </div>
       </div>
-
       <Footer />
-    </div>
+    </>
   );
 }
