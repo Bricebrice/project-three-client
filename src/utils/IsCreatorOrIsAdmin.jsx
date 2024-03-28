@@ -18,20 +18,17 @@ export default function IsCreatorOrIsAdmin({ children }) {
     findAndSetMeal();
   }, []);
 
-  if (isLoading) {
+  if (isLoading || meal === undefined) {
     return <VegSpinner />;
   }
 
   if (isLoggedIn) {
-    // if (isAdmin || (meal && user._id === meal.creator)) { // Test to debug
-    if (isAdmin || user._id === meal.creator) {
+    if (isAdmin || (meal && user._id === meal.creator)) {
       return children;
     } else {
-      // console.log("Redirecting to /all-meals");
-      // console.log("isAdmin:", isAdmin);
-      // console.log("meal:", meal);
-      // console.log("user._id:", user._id);
       return <Navigate to="/all-meals" />;
     }
-  } else return <Navigate to="/all-meals" />;
+  } else {
+    return <Navigate to="/all-meals" />;
+  }
 }
