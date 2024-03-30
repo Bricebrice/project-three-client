@@ -44,7 +44,7 @@ function NutritionDetails({
           {name}
         </h2>
         <h3 className="mb-4 font-semibold text-gray-900 dark:text-white">
-          Nutritional Information:
+          Nutritional Information per 100g:
         </h3>
         <ul className="list-disc pl-8">
           <li>Calories: {calories}kcal</li>

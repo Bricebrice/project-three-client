@@ -44,7 +44,7 @@ export default function AllIngredientsPage() {
           Ingredients
         </h2>
         <SearchComponent setQuery={setQuery} type={"ingredients"} />
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-10">
           {allIngredients
             .filter((ingredient) => {
               if (query === "") {

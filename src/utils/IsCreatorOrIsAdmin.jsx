@@ -12,7 +12,7 @@ export default function IsCreatorOrIsAdmin({ children }) {
   useEffect(() => {
     async function findAndSetMeal() {
       const response = await mealService.findById(mealId);
-      setMeal(response.data);
+      await setMeal(response.data);
     }
 
     findAndSetMeal();

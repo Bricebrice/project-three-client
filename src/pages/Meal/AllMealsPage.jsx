@@ -5,7 +5,6 @@ import Card from "../../components/Card";
 import VegSpinner from "../../components/VegSpinner";
 import SearchComponent from "../../components/SearchComponent";
 
-
 function AllMealsPage() {
   const [allMeals, setAllMeals] = useState([]);
   const [query, setQuery] = useState("");
@@ -43,18 +42,20 @@ function AllMealsPage() {
             Meals
           </h2>
           <SearchComponent setQuery={setQuery} type={"meals"} />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-            {allMeals.filter((meal) => {
-              if (query === "") {
-                return meal;
-              } else if (
-                meal.name.toLowerCase().includes(query.toLowerCase())
-              ) {
-                return meal;
-              } else return;
-            }).map((meal) => {
-              return <Card key={meal._id} item={meal} url="/meal" />;
-            })}
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-3 lg:grid-cols-4 lg:gap-10">
+            {allMeals
+              .filter((meal) => {
+                if (query === "") {
+                  return meal;
+                } else if (
+                  meal.name.toLowerCase().includes(query.toLowerCase())
+                ) {
+                  return meal;
+                } else return;
+              })
+              .map((meal) => {
+                return <Card key={meal._id} item={meal} url="/meal" />;
+              })}
           </div>
         </section>
         <Footer />

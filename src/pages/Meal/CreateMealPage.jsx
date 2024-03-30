@@ -9,6 +9,7 @@ import ingredientService from "../../services/ingredient.service";
 import authService from "../../services/auth.service";
 import mealService from "../../services/meal.service";
 import Footer from "../../components/Footer";
+import RemoveBar from "../../components/RemoveBar";
 
 export default function CreateMealPage() {
   const [form, setForm] = useState({
@@ -65,7 +66,8 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0).toFixed(1);
+      .reduce((acc, current) => acc + current, 0)
+      .toFixed(1);
     let fats = recipeIngredients
       .map((ingredient) => {
         return (
@@ -74,7 +76,8 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0).toFixed(1);
+      .reduce((acc, current) => acc + current, 0)
+      .toFixed(1);
 
     let carbs = recipeIngredients
       .map((ingredient) => {
@@ -84,7 +87,8 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0).toFixed(1);
+      .reduce((acc, current) => acc + current, 0)
+      .toFixed(1);
 
     let calories = recipeIngredients
       .map((ingredient) => {
@@ -94,7 +98,8 @@ export default function CreateMealPage() {
           ) / 10
         );
       })
-      .reduce((acc, current) => acc + current, 0).toFixed(1);
+      .reduce((acc, current) => acc + current, 0)
+      .toFixed(1);
 
     let ingredients = recipeIngredients.map((ingredient) => {
       return { item: ingredient.item._id, quantity: ingredient.quantity };
@@ -236,6 +241,11 @@ export default function CreateMealPage() {
             setAllIngredients={setAllIngredients}
           />
 
+          <RemoveBar
+            recipe={recipeIngredients}
+            setRecipe={setRecipeIngredients}
+          />
+
           <div className="mb-5">
             <input
               className="bg-gray-100 border border-gray-400 text-sm rounded-lg w-full p-2.5"
@@ -275,7 +285,13 @@ export default function CreateMealPage() {
               value={form.carbs}
               onChange={handleChange}
             />
-            <input type="text" hidden id="creator" value={user._id} onChange={handleChange}/>
+            <input
+              type="text"
+              hidden
+              id="creator"
+              value={user._id}
+              onChange={handleChange}
+            />
           </div>
           <div className="mb-5 flex-col items-center justify-center w-full">
             <input
