@@ -1,4 +1,5 @@
 import SquareCard from "./SquareCard";
+import { Link } from "react-router-dom";
 
 export default function FavoriteIngredients(props) {
   const { favIngredients } = props;
@@ -10,9 +11,21 @@ export default function FavoriteIngredients(props) {
       </h3>
 
       <div className="flex flex-wrap justify-around sm:justify-center gap-4">
-        {favIngredients.map((meal) => (
-          <SquareCard key={meal._id} item={meal} url="/meal" />
-        ))}
+        {favIngredients.length === 0 ? (
+          <p>
+            No favorite meals yet! Add some{" "}
+            <Link
+              to={"/all-meals"}
+              className="underline text-blue-600 underline-offset-2"
+            >
+              here
+            </Link>
+          </p>
+        ) : (
+          favIngredients.map((ingredient) => (
+            <SquareCard key={ingredient._id} item={ingredient} url="/ingredient" />
+          ))
+        )}
       </div>
     </section>
   );
