@@ -15,7 +15,7 @@ export default function FavoriteIngredients(props) {
           <p>
             No favorite meals yet! Add some{" "}
             <Link
-              to={"/all-meals"}
+              to={"/all-ingredients"}
               className="underline text-blue-600 underline-offset-2"
             >
               here
