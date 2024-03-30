@@ -13,7 +13,7 @@ export default function FavoriteIngredients(props) {
       <div className="flex flex-wrap justify-around sm:justify-center gap-4">
         {favIngredients.length === 0 ? (
           <p>
-            No favorite meals yet! Add some{" "}
+            No favorite ingredients yet! Add some{" "}
             <Link
               to={"/all-ingredients"}
               className="underline text-blue-600 underline-offset-2"
